@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEWS | SOUZOUDO Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f7f5;
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --accent: #1a1a1a;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .logo {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s ease;
+    }
+
+    .logo:hover {
+      opacity: 0.6;
+    }
+
+    .back-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .page-subtitle {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* News List */
+    .news-list {
+      list-style: none;
+    }
+
+    .news-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .news-item:nth-child(1) { animation-delay: 0.2s; }
+    .news-item:nth-child(2) { animation-delay: 0.3s; }
+    .news-item:nth-child(3) { animation-delay: 0.4s; }
+    .news-item:nth-child(4) { animation-delay: 0.5s; }
+    .news-item:nth-child(5) { animation-delay: 0.6s; }
+
+    .news-item a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.3s ease;
+    }
+
+    .news-item a:hover {
+      opacity: 0.7;
+    }
+
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .news-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+    }
+
+    .news-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 0.25rem 0.5rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 2px;
+    }
+
+    .news-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .news-excerpt {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+
+    /* Article Detail */
+    .article {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    }
+
+    .article-header {
+      margin-bottom: 3rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+    }
+
+    .article-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 0.25rem 0.5rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 2px;
+    }
+
+    .article-title {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .article-body {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Back to List */
+    .back-to-list {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .back-to-list a {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .back-to-list a:hover {
+      color: var(--text);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 6rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header {
+        padding: 1rem 1.5rem;
+      }
+
+      .container {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .page-header {
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .news-item {
+        padding: 1.5rem 0;
+      }
+
+      .news-title {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="/" class="logo">SOUZOUDO</a>
+    <a href="/" class="back-link">← Back to Home</a>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">NEWS</h1>
+      <p class="page-subtitle">Latest Updates</p>
+    </div>
+
+    <!-- News List -->
+    <ul class="news-list" id="newsList">
+      <li class="news-item" style="animation: none; opacity: 1;">
+        <p style="color: var(--text-light); font-size: 0.85rem;">読み込み中...</p>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    // Supabase Configuration
+    const SUPABASE_URL = 'https://kiatkhhncmyfczlgkyrf.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpYXRraGhuY215ZmN6bGdreXJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5OTkxMjgsImV4cCI6MjA4NDU3NTEyOH0.3tsQCmOlA3nV_NRR0mohBnKKjG5cvrjkn_lk5-zuiI4';
+
+    // Format date as YYYY.MM.DD
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    }
+
+    // Fetch news from Supabase
+    async function fetchNews() {
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/news?is_published=eq.true&order=date.desc`,
+          {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch news');
+        }
+
+        const news = await response.json();
+        renderNews(news);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        document.getElementById('newsList').innerHTML = `
+          <li class="news-item" style="animation: none; opacity: 1;">
+            <p style="color: var(--text-light); font-size: 0.85rem;">ニュースを読み込めませんでした。</p>
+          </li>
+        `;
+      }
+    }
+
+    // Render news list
+    function renderNews(news) {
+      const container = document.getElementById('newsList');
+
+      if (news.length === 0) {
+        container.innerHTML = `
+          <li class="news-item" style="animation: none; opacity: 1;">
+            <p style="color: var(--text-light); font-size: 0.85rem;">ニュースはまだありません。</p>
+          </li>
+        `;
+        return;
+      }
+
+      container.innerHTML = news.map((item, index) => `
+        <li class="news-item" style="animation-delay: ${0.2 + index * 0.1}s;">
+          <a href="/news/article.html?slug=${encodeURIComponent(item.slug)}">
+            <div class="news-meta">
+              <span class="news-date">${formatDate(item.date)}</span>
+              <span class="news-category">${item.category}</span>
+            </div>
+            <h2 class="news-title">${item.title}</h2>
+            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
+          </a>
+        </li>
+      `).join('');
+    }
+
+    // Initialize
+    fetchNews();
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">© 2026 SOUZOUDO Inc.</p>
+  </footer>
+</body>
+</html>

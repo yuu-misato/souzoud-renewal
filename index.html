@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOUZOUD Inc. | Renewal</title>
+  <title>SOUZOUDO Inc. | Renewal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -30,19 +30,241 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
+      perspective: 1000px;
     }
 
     .container {
-      flex: 1;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 2rem;
       position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Company Profile - Overlay on same screen */
+    .company-section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 4rem;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 50;
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .company-section.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .company-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+    }
+
+    .section-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .profile-item {
+      padding: 1.5rem 1.5rem 1.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .profile-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .profile-item:not(:nth-child(3n)) {
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .profile-item:nth-child(3n) {
+      padding-left: 1.5rem;
+      padding-right: 0;
+    }
+
+    .profile-item:nth-child(3n-1) {
+      padding-left: 1.5rem;
+    }
+
+    .profile-item:nth-last-child(-n+3) {
+      border-bottom: none;
+    }
+
+    .profile-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .profile-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .profile-value-lg {
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-value-sub {
+      margin-top: 0.3rem;
+      color: var(--text-light);
+      font-size: 0.75rem;
+    }
+
+    /* Back button */
+    .back-button {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
+    }
+
+    .back-button.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .back-button:hover {
+      color: var(--text);
+    }
+
+    .back-button::before {
+      content: '←';
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .company-section {
+        padding: 5rem 1.5rem 2rem;
+        overflow-y: auto;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .profile-item {
+        padding: 1.2rem 0;
+      }
+
+      .profile-item:not(:nth-child(3n)) {
+        border-right: none;
+      }
+
+      .profile-item:nth-child(3n),
+      .profile-item:nth-child(3n-1) {
+        padding-left: 0;
+      }
+
+      .profile-item:nth-child(odd) {
+        padding-right: 1rem;
+        border-right: 1px solid rgba(0,0,0,0.06);
+      }
+
+      .profile-item:nth-child(even) {
+        padding-left: 1rem;
+      }
+
+      .profile-item:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+
+      .profile-item:nth-last-child(3) {
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+
+      .back-button {
+        top: 1.5rem;
+        left: 1.5rem;
+      }
     }
 
     .logo {
@@ -50,9 +272,36 @@
       font-weight: 600;
       letter-spacing: -0.03em;
       margin-bottom: 1.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .logo-char {
+      display: inline-block;
+      position: absolute;
+      opacity: 1;
+      transition: none;
+      cursor: default;
+    }
+
+    .logo-char.floating {
+      position: fixed;
+      transition: font-size 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .logo-char.assembled {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.15s ease-out;
+      left: auto !important;
+      top: auto !important;
+    }
+
+    .logo-char.assembled:hover {
+      transform: translateY(-10px) translateZ(20px) rotate(5deg);
     }
 
     .status {
@@ -60,25 +309,57 @@
       align-items: center;
       gap: 0.75rem;
       color: var(--text-light);
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+      transform: translateY(20px) translateZ(0);
+    }
+
+    .status.visible {
+      opacity: 1;
+      transform: translateZ(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .pulse {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background: var(--accent);
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .service-roller {
+      height: 1.2em;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .service-roller-inner {
+      display: flex;
+      flex-direction: column;
+      animation: rollServices 14s linear infinite;
+    }
+
+    .service-roller-inner span {
+      height: 1.2em;
+      line-height: 1.2em;
+      white-space: nowrap;
+    }
+
+    @keyframes rollServices {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
     }
 
     .line {
       position: fixed;
       background: rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease-out;
+      opacity: 0;
+      animation: lineDissolve 1.5s ease forwards;
     }
 
     .line-h {
@@ -93,10 +374,15 @@
       top: 0;
     }
 
-    .line-top { top: 2rem; }
-    .line-bottom { bottom: 2rem; }
-    .line-left { left: 2rem; }
-    .line-right { right: 2rem; }
+    .line-top { top: 2rem; animation-delay: 0.2s; }
+    .line-bottom { bottom: 2rem; animation-delay: 0.4s; }
+    .line-left { left: 2rem; animation-delay: 0.3s; }
+    .line-right { right: 2rem; animation-delay: 0.5s; }
+
+    @keyframes lineDissolve {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
     .corner {
       position: fixed;
@@ -105,6 +391,7 @@
       letter-spacing: 0.05em;
       opacity: 0;
       animation: fadeIn 1s ease 0.6s forwards;
+      transition: transform 0.15s ease-out;
     }
 
     .corner-tl { top: 2.5rem; left: 2.5rem; }
@@ -127,8 +414,13 @@
       width: min(280px, 80vw);
       margin-top: 3rem;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+      transform: translateY(20px) translateZ(0);
+    }
+
+    .progress-container.visible {
+      opacity: 1;
+      transform: translateZ(15px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
     }
 
     .progress-bar {
@@ -140,10 +432,10 @@
     }
 
     .progress-fill {
-      width: 0%;
+      width: 31%;
       height: 100%;
       background: var(--accent);
-      animation: progress 3s cubic-bezier(0.22, 1, 0.36, 1) 1s forwards;
+      transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .progress-text {
@@ -155,11 +447,137 @@
       letter-spacing: 0.05em;
     }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* MiERU Link */
+    .mieru-section {
+      margin-top: 2.5rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.4s;
+    }
+
+    .mieru-section.visible {
+      opacity: 1;
+    }
+
+    .mieru-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--text-light);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .mieru-link {
+      display: inline-block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .mieru-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0.3rem;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    /* NEWS Section */
+    .news-section {
+      margin-top: 3rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.6s;
+    }
+
+    .news-section.visible {
+      opacity: 1;
+    }
+
+    .news-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--text-light);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .news-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .news-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      font-size: 0.75rem;
+      color: var(--text);
+    }
+
+    .news-date {
+      color: var(--text-light);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .news-text {
+      text-align: left;
+    }
+
+    .news-link {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.3s ease;
+    }
+
+    .news-link:hover {
+      opacity: 0.6;
+    }
+
+    .news-more {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .news-more:hover {
+      color: var(--text);
+    }
+
+    .mieru-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
     @keyframes fadeIn {
@@ -179,10 +597,87 @@
       }
     }
 
-    @keyframes progress {
-      to {
-        width: 31%;
+    /* Floating shapes */
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: 2px;
+      transition: transform 0.3s ease-out;
+      animation: shapeFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes shapeFloat {
+      0%, 100% {
+        transform: translate(var(--float-x, 0), var(--float-y, 0)) rotate(var(--rotation, 0deg));
       }
+    }
+
+    .shape-1 {
+      width: 120px;
+      height: 120px;
+      top: 15%;
+      left: 10%;
+      transform: rotate(15deg);
+    }
+
+    .shape-2 {
+      width: 80px;
+      height: 80px;
+      top: 70%;
+      left: 15%;
+      transform: rotate(-10deg);
+    }
+
+    .shape-3 {
+      width: 150px;
+      height: 150px;
+      top: 20%;
+      right: 8%;
+      transform: rotate(25deg);
+    }
+
+    .shape-4 {
+      width: 60px;
+      height: 60px;
+      top: 65%;
+      right: 12%;
+      transform: rotate(-20deg);
+    }
+
+    .shape-5 {
+      width: 100px;
+      height: 100px;
+      top: 45%;
+      left: 5%;
+      transform: rotate(5deg);
+    }
+
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     @media (max-width: 640px) {
@@ -208,8 +703,16 @@
   <div class="line line-v line-left"></div>
   <div class="line line-v line-right"></div>
 
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+  </div>
+
   <div class="corner corner-tl">
-    SOUZOUD Inc.
+    SOUZOUDO Inc.
   </div>
 
   <div class="corner corner-tr">
@@ -225,11 +728,42 @@
   </div>
 
   <div class="container">
-    <h1 class="logo">SOUZOUD</h1>
+    <h1 class="logo" id="logo"></h1>
 
     <div class="status">
       <span class="pulse"></span>
-      <span>Renewal in Progress</span>
+      <div class="service-roller">
+        <div class="service-roller-inner">
+          <span>Production Services</span>
+          <span>Web Design & Dev</span>
+          <span>Ad Creatives</span>
+          <span>Branding & Logo</span>
+          <span>Promo Videos</span>
+          <span>Print Design</span>
+          <span>Videography</span>
+          <span>Photography</span>
+          <span>Web Design</span>
+          <span>Logo Design</span>
+          <span>Brochures</span>
+          <span>Illustration</span>
+          <span>Copywriting</span>
+          <span>Animation</span>
+          <span>Production Services</span>
+          <span>Web Design & Dev</span>
+          <span>Ad Creatives</span>
+          <span>Branding & Logo</span>
+          <span>Promo Videos</span>
+          <span>Print Design</span>
+          <span>Videography</span>
+          <span>Photography</span>
+          <span>Web Design</span>
+          <span>Logo Design</span>
+          <span>Brochures</span>
+          <span>Illustration</span>
+          <span>Copywriting</span>
+          <span>Animation</span>
+        </div>
+      </div>
     </div>
 
     <div class="progress-container">
@@ -241,6 +775,609 @@
         <span>31%</span>
       </div>
     </div>
+
+    <div class="mieru-section" id="mieruSection">
+      <div class="mieru-label">Our Product</div>
+      <a class="mieru-link" href="https://mieru.sou-zou-do.com/" target="_blank" rel="noopener">MiERU →</a>
+    </div>
+
+    <div class="news-section" id="newsSection">
+      <div class="news-label">News</div>
+      <ul class="news-list" id="newsList">
+        <li class="news-item">
+          <span class="news-text" style="color: var(--text-light); font-size: 0.7rem;">読み込み中...</span>
+        </li>
+      </ul>
+      <a href="/news.html" class="news-more">View All →</a>
+    </div>
   </div>
+
+  <!-- Company Profile Section -->
+  <section class="company-section" id="companySection">
+    <div class="back-button" id="backButton">Back</div>
+    <div class="company-inner">
+      <div class="section-header">
+        <h2 class="section-title" data-profile>PROFILE</h2>
+        <span class="section-label" data-profile>Company Information</span>
+      </div>
+
+      <div class="profile-grid">
+        <div class="profile-item" data-profile data-delay="0">
+          <span class="profile-label">Company</span>
+          <div class="profile-value profile-value-lg">SOUZOUDO Inc.</div>
+        </div>
+
+        <div class="profile-item" data-profile data-delay="1">
+          <span class="profile-label">Representative</span>
+          <div class="profile-value profile-value-lg">Yusaku Suzuki</div>
+          <div class="profile-value-sub">CEO</div>
+        </div>
+
+        <div class="profile-item" data-profile data-delay="2">
+          <span class="profile-label">Location</span>
+          <div class="profile-value">The Park House, Room 1505, 1-3-6 Misato, Misato City, Saitama Prefecture, 341-0024</div>
+        </div>
+
+        <div class="profile-item" data-profile data-delay="3">
+          <span class="profile-label">Established</span>
+          <div class="profile-value profile-value-lg">2022.09.06</div>
+        </div>
+
+        <div class="profile-item" data-profile data-delay="4">
+          <span class="profile-label">Business</span>
+          <div class="profile-value">Customer Journey Design<br>Production Services<br>Consulting</div>
+        </div>
+
+        <div class="profile-item" data-profile data-delay="5">
+          <span class="profile-label">Hours</span>
+          <div class="profile-value profile-value-lg">10:00 — 18:00</div>
+          <div class="profile-value-sub">Weekdays Only</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text span:last-child');
+    const container = document.querySelector('.container');
+    const logo = document.getElementById('logo');
+    const status = document.querySelector('.status');
+    const progressContainer = document.querySelector('.progress-container');
+    const corners = document.querySelectorAll('.corner');
+    const lines = document.querySelectorAll('.line');
+    const shapes = document.querySelectorAll('.shape');
+
+    // Logo text and character elements
+    const logoText = 'SOUZOUDO';
+    const chars = [];
+    let isAssembled = false;
+    let charFloatTime = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    // Create individual character elements
+    logoText.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.className = 'logo-char floating';
+      span.textContent = char;
+      span.dataset.index = i;
+
+      // Random starting position with margin from edges
+      const margin = 100;
+      const startX = margin + Math.random() * (window.innerWidth - margin * 2);
+      const startY = margin + Math.random() * (window.innerHeight - margin * 2);
+      const startRotation = Math.random() * 360 - 180;
+
+      // Random size for depth perception - extreme range for impact
+      // Scale from tiny (0.15x) to massive (8x) - largest fills ~half the screen
+      const depthScale = 0.15 + Math.random() * 7.85;
+      const logoFontSize = Math.min(window.innerWidth * 0.08, 80);
+      const floatingFontSize = logoFontSize * depthScale;
+
+      // Adjust opacity based on depth - far = faint, close = bold
+      const opacity = depthScale < 1
+        ? 0.15 + depthScale * 0.4  // Small letters: 0.15 - 0.55
+        : Math.min(0.9, 0.5 + (depthScale - 1) * 0.06); // Large letters: 0.5 - 0.9
+
+      span.style.left = startX + 'px';
+      span.style.top = startY + 'px';
+      span.style.transform = `rotate(${startRotation}deg)`;
+      span.style.fontSize = floatingFontSize + 'px';
+      span.style.opacity = opacity;
+      span.dataset.depthScale = depthScale;
+
+      // Store initial random values for floating animation
+      span.dataset.offsetX = Math.random() * 2 - 1;
+      span.dataset.offsetY = Math.random() * 2 - 1;
+      span.dataset.speed = 0.3 + Math.random() * 0.4;
+      span.dataset.rotSpeed = (Math.random() - 0.5) * 1.5;
+
+      chars.push({
+        el: span,
+        x: startX,
+        y: startY,
+        targetX: startX,
+        targetY: startY,
+        rotation: startRotation,
+        targetRotation: startRotation,
+        vx: 0,
+        vy: 0
+      });
+
+      document.body.appendChild(span);
+    });
+
+    // Floating animation for scattered chars
+    function animateFloatingChars() {
+      if (isAssembled) return;
+
+      charFloatTime += 0.02;
+
+      chars.forEach((char, i) => {
+        const offsetX = parseFloat(char.el.dataset.offsetX);
+        const offsetY = parseFloat(char.el.dataset.offsetY);
+        const speed = parseFloat(char.el.dataset.speed);
+        const rotSpeed = parseFloat(char.el.dataset.rotSpeed);
+
+        // Gentle floating movement
+        char.x += Math.sin(charFloatTime * speed + i) * 0.5 * offsetX;
+        char.y += Math.cos(charFloatTime * speed * 0.7 + i) * 0.5 * offsetY;
+        char.rotation += rotSpeed * 0.3;
+
+        // Mouse repulsion during floating
+        const dx = mouseX - char.x;
+        const dy = mouseY - char.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const repelDist = 120;
+
+        if (dist < repelDist && dist > 0) {
+          const force = (1 - dist / repelDist) * 8;
+          const angle = Math.atan2(dy, dx);
+          char.x -= Math.cos(angle) * force;
+          char.y -= Math.sin(angle) * force;
+          char.rotation += (Math.random() - 0.5) * force * 0.5;
+        }
+
+        // Keep within bounds
+        if (char.x < 50) char.x = 50;
+        if (char.x > window.innerWidth - 50) char.x = window.innerWidth - 50;
+        if (char.y < 50) char.y = 50;
+        if (char.y > window.innerHeight - 50) char.y = window.innerHeight - 50;
+
+        char.el.style.left = char.x + 'px';
+        char.el.style.top = char.y + 'px';
+        char.el.style.transform = `rotate(${char.rotation}deg)`;
+      });
+
+      requestAnimationFrame(animateFloatingChars);
+    }
+
+    animateFloatingChars();
+
+    // Assemble characters to center after delay
+    function assembleChars() {
+      isAssembled = true;
+
+      // Get the final assembled font size
+      const computedStyle = getComputedStyle(logo);
+      const fontSize = parseFloat(computedStyle.fontSize);
+      const letterSpacing = -0.03 * fontSize;
+      const charWidth = fontSize * 0.6; // Approximate char width
+
+      // Calculate total logo width
+      const totalLogoWidth = (charWidth * logoText.length) + (letterSpacing * (logoText.length - 1));
+
+      // Center of screen
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      // Starting X position (leftmost character)
+      const startX = centerX - (totalLogoWidth / 2);
+
+      chars.forEach((char, i) => {
+        // Target position - true center of screen
+        const targetX = startX + (i * (charWidth + letterSpacing)) + (charWidth / 2);
+        const targetY = centerY;
+
+        // Animate to position with size normalization
+        char.el.style.transition = `left 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s,
+                                    top 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s,
+                                    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s,
+                                    font-size 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s,
+                                    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s`;
+
+        char.el.style.left = targetX + 'px';
+        char.el.style.top = targetY + 'px';
+        char.el.style.transform = 'rotate(0deg) translate(-50%, -50%)';
+        char.el.style.fontSize = fontSize + 'px';
+        char.el.style.opacity = '1';
+      });
+
+      // After assembly, move chars into logo element
+      setTimeout(() => {
+        // Hide all chars first
+        chars.forEach((char) => {
+          char.el.style.opacity = '0';
+        });
+
+        // Short delay then move to logo
+        setTimeout(() => {
+          chars.forEach((char, i) => {
+            char.el.classList.remove('floating');
+            char.el.classList.add('assembled');
+            char.el.style.transition = '';
+            char.el.style.left = '';
+            char.el.style.top = '';
+            char.el.style.transform = '';
+            char.el.style.fontSize = '';
+            logo.appendChild(char.el);
+          });
+
+          // Fade in the assembled logo
+          requestAnimationFrame(() => {
+            chars.forEach((char) => {
+              char.el.style.transition = 'opacity 0.3s ease';
+              char.el.style.opacity = '1';
+            });
+          });
+
+          // Show status and progress
+          status.classList.add('visible');
+          progressContainer.classList.add('visible');
+
+          // Show MiERU section
+          const mieruSection = document.getElementById('mieruSection');
+          setTimeout(() => {
+            mieruSection.classList.add('visible');
+          }, 300);
+
+          // Show NEWS section
+          const newsSection = document.getElementById('newsSection');
+          setTimeout(() => {
+            newsSection.classList.add('visible');
+          }, 500);
+
+          // Start interactive mode
+          startInteractiveMode();
+        }, 50);
+      }, 1500);
+    }
+
+    // Start assembly after 2.5 seconds
+    setTimeout(assembleChars, 2500);
+
+    // Interactive mode - chars respond to mouse
+
+    function startInteractiveMode() {
+      // Mouse influence on individual chars
+      function animateInteractive() {
+        const logoRect = logo.getBoundingClientRect();
+        const logoCenterX = logoRect.left + logoRect.width / 2;
+        const logoCenterY = logoRect.top + logoRect.height / 2;
+
+        chars.forEach((char, i) => {
+          const charRect = char.el.getBoundingClientRect();
+          const charCenterX = charRect.left + charRect.width / 2;
+          const charCenterY = charRect.top + charRect.height / 2;
+
+          // Distance from mouse to char
+          const dx = mouseX - charCenterX;
+          const dy = mouseY - charCenterY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          // Repel effect when mouse is close
+          const maxDist = 150;
+          if (dist < maxDist) {
+            const force = (1 - dist / maxDist) * 20;
+            const angle = Math.atan2(dy, dx);
+            const offsetX = -Math.cos(angle) * force;
+            const offsetY = -Math.sin(angle) * force;
+            const rotation = (offsetX * 0.5);
+
+            char.el.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+          } else {
+            char.el.style.transform = '';
+          }
+        });
+
+        requestAnimationFrame(animateInteractive);
+      }
+
+      animateInteractive();
+    }
+
+    // Track mouse/touch position
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      mouseX = e.touches[0].clientX;
+      mouseY = e.touches[0].clientY;
+    });
+
+    // Random progress
+    function randomProgress() {
+      const min = 15;
+      const max = 85;
+      const value = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      progressFill.style.width = value + '%';
+      progressText.textContent = value + '%';
+
+      const nextDelay = Math.random() * 2000 + 800;
+      setTimeout(randomProgress, nextDelay);
+    }
+
+    setTimeout(randomProgress, 4000);
+
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+
+    // Mouse movement (desktop) for 3D effect
+    document.addEventListener('mousemove', (e) => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      targetX = (e.clientX - centerX) / centerX;
+      targetY = (e.clientY - centerY) / centerY;
+    });
+
+    // Touch movement (mobile)
+    document.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      targetX = (touch.clientX - centerX) / centerX;
+      targetY = (touch.clientY - centerY) / centerY;
+    });
+
+    // Device orientation (mobile tilt)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (e) => {
+        if (e.gamma !== null && e.beta !== null) {
+          targetX = Math.max(-1, Math.min(1, e.gamma / 30));
+          targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
+        }
+      });
+    }
+
+    function animate() {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      const rotateY = currentX * 8;
+      const rotateX = -currentY * 5;
+
+      container.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+      corners.forEach((corner, i) => {
+        const factor = 0.5;
+        const offsetX = -currentX * 15 * factor;
+        const offsetY = -currentY * 10 * factor;
+        corner.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      });
+
+      lines.forEach((line, i) => {
+        const isHorizontal = line.classList.contains('line-h');
+        if (isHorizontal) {
+          line.style.transform = `translateY(${currentY * 3}px)`;
+        } else {
+          line.style.transform = `translateX(${currentX * 3}px)`;
+        }
+      });
+
+      shapes.forEach((shape, i) => {
+        const depth = (i + 1) * 0.3;
+        const rotationBase = [15, -10, 25, -20, 5][i];
+        const offsetX = currentX * 30 * depth;
+        const offsetY = currentY * 20 * depth;
+        const rotation = rotationBase + currentX * 5;
+        shape.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Auto floating animation for shapes
+    let floatTime = 0;
+    function floatShapes() {
+      floatTime += 0.015;
+      shapes.forEach((shape, i) => {
+        const baseY = Math.sin(floatTime + i * 1.5) * 15;
+        const baseX = Math.cos(floatTime * 0.7 + i) * 10;
+        shape.style.setProperty('--float-x', baseX + 'px');
+        shape.style.setProperty('--float-y', baseY + 'px');
+      });
+      requestAnimationFrame(floatShapes);
+    }
+    floatShapes();
+
+    // Profile section elements
+    const companySection = document.getElementById('companySection');
+    const backButton = document.getElementById('backButton');
+    const profileElements = document.querySelectorAll('[data-profile]');
+
+    let isProfileVisible = false;
+    let isTransitioning = false;
+    let canNavigate = false; // Only allow navigation after assembly
+
+    // Show profile section
+    function showProfile() {
+      if (isProfileVisible || isTransitioning || !canNavigate) return;
+      isTransitioning = true;
+      isProfileVisible = true;
+
+      // Fade out the main container elements
+      container.style.transition = 'opacity 0.6s ease';
+      container.style.opacity = '0';
+
+      setTimeout(() => {
+        // Show company section
+        companySection.classList.add('visible');
+
+        // Animate profile elements with stagger
+        setTimeout(() => {
+          profileElements.forEach((el, i) => {
+            const delay = el.dataset.delay || 0;
+            setTimeout(() => {
+              el.classList.add('visible');
+            }, delay * 80);
+          });
+
+          // Show back button
+          backButton.classList.add('visible');
+          isTransitioning = false;
+        }, 200);
+      }, 600);
+    }
+
+    // Hide profile and go back to main
+    function hideProfile() {
+      if (!isProfileVisible || isTransitioning) return;
+      isTransitioning = true;
+
+      // Remove visible from all profile elements
+      profileElements.forEach(el => el.classList.remove('visible'));
+      backButton.classList.remove('visible');
+
+      setTimeout(() => {
+        companySection.classList.remove('visible');
+
+        setTimeout(() => {
+          container.style.opacity = '1';
+          isProfileVisible = false;
+          isTransitioning = false;
+        }, 200);
+      }, 400);
+    }
+
+    backButton.addEventListener('click', hideProfile);
+
+    // Wheel navigation (scroll down = show profile, scroll up = hide profile)
+    let wheelAccumulator = 0;
+    const wheelThreshold = 50;
+
+    document.addEventListener('wheel', (e) => {
+      if (!canNavigate || isTransitioning) return;
+
+      wheelAccumulator += e.deltaY;
+
+      if (wheelAccumulator > wheelThreshold && !isProfileVisible) {
+        showProfile();
+        wheelAccumulator = 0;
+      } else if (wheelAccumulator < -wheelThreshold && isProfileVisible) {
+        hideProfile();
+        wheelAccumulator = 0;
+      }
+
+      // Reset accumulator if it gets too large
+      if (Math.abs(wheelAccumulator) > wheelThreshold * 2) {
+        wheelAccumulator = 0;
+      }
+    });
+
+    // Touch swipe navigation for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const swipeThreshold = 50;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (!canNavigate || isTransitioning) return;
+
+      touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+
+      if (deltaY > swipeThreshold && !isProfileVisible) {
+        // Swipe up = show profile
+        showProfile();
+      } else if (deltaY < -swipeThreshold && isProfileVisible) {
+        // Swipe down = hide profile
+        hideProfile();
+      }
+    }, { passive: true });
+
+    // Enable navigation after assembly completes
+    setTimeout(() => {
+      canNavigate = true;
+    }, 4500);
+
+    // Supabase Configuration for NEWS
+    const SUPABASE_URL = 'https://kiatkhhncmyfczlgkyrf.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpYXRraGhuY215ZmN6bGdreXJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5OTkxMjgsImV4cCI6MjA4NDU3NTEyOH0.3tsQCmOlA3nV_NRR0mohBnKKjG5cvrjkn_lk5-zuiI4';
+
+    // Format date as YYYY.MM.DD
+    function formatNewsDate(dateStr) {
+      const date = new Date(dateStr);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    }
+
+    // Fetch latest news from Supabase
+    async function fetchLatestNews() {
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/news?is_published=eq.true&order=date.desc&limit=3`,
+          {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch news');
+        }
+
+        const news = await response.json();
+        renderLatestNews(news);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        document.getElementById('newsList').innerHTML = `
+          <li class="news-item">
+            <span class="news-text" style="color: var(--text-light); font-size: 0.7rem;">ニュースを読み込めませんでした</span>
+          </li>
+        `;
+      }
+    }
+
+    // Render latest news
+    function renderLatestNews(news) {
+      const container = document.getElementById('newsList');
+
+      if (news.length === 0) {
+        container.innerHTML = `
+          <li class="news-item">
+            <span class="news-text" style="color: var(--text-light); font-size: 0.7rem;">ニュースはまだありません</span>
+          </li>
+        `;
+        return;
+      }
+
+      container.innerHTML = news.map(item => `
+        <li class="news-item">
+          <a href="/news/article.html?slug=${encodeURIComponent(item.slug)}" class="news-link">
+            <span class="news-date">${formatNewsDate(item.date)}</span>
+            <span class="news-text">${item.title}</span>
+          </a>
+        </li>
+      `).join('');
+    }
+
+    // Fetch news on page load
+    fetchLatestNews();
+  </script>
 </body>
 </html>

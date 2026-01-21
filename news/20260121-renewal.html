@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPをリニューアルしました。 | NEWS | SOUZOUDO Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f7f5;
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --accent: #1a1a1a;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .logo {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s ease;
+    }
+
+    .logo:hover {
+      opacity: 0.6;
+    }
+
+    .back-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Article Detail */
+    .article {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+    }
+
+    .article-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+    }
+
+    .article-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 0.25rem 0.5rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 2px;
+    }
+
+    .article-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .article-body {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text);
+    }
+
+    .article-body p {
+      margin-bottom: 1.75rem;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Back to List */
+    .back-to-list {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    }
+
+    .back-to-list a {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .back-to-list a:hover {
+      color: var(--text);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 6rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header {
+        padding: 1rem 1.5rem;
+      }
+
+      .container {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .article-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .article-body {
+        font-size: 0.9rem;
+        line-height: 1.9;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="/" class="logo">SOUZOUDO</a>
+    <a href="/news.html" class="back-link">← Back to News</a>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Article -->
+    <article class="article">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">2026.01.21</span>
+          <span class="article-category">Info</span>
+        </div>
+        <h1 class="article-title">HPをリニューアルしました。</h1>
+      </header>
+
+      <div class="article-body">
+        <p>
+          このたび、SOUZOUDOのコーポレートサイトを全面的にリニューアルいたしました。
+        </p>
+        <p>
+          新しいサイトでは、より洗練されたデザインと使いやすさを追求し、私たちのビジョンやサービス内容をより分かりやすくお伝えできるようになりました。
+        </p>
+        <p>
+          SOUZOUDOは「創造道」という社名に込めた想い—創造することへの道を切り拓く—を大切に、お客様のビジネスに貢献するサービスを提供してまいります。
+        </p>
+        <p>
+          今後とも、SOUZOUDOをよろしくお願いいたします。
+        </p>
+      </div>
+    </article>
+
+    <!-- Back to List -->
+    <div class="back-to-list">
+      <a href="/news.html">← ニュース一覧へ戻る</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">© 2026 SOUZOUDO Inc.</p>
+  </footer>
+</body>
+</html>
