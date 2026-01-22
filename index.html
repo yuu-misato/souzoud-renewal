@@ -1154,11 +1154,6 @@
       </div>
     </div>
 
-    <div class="mieru-section" id="mieruSection">
-      <div class="mieru-label">Our Product</div>
-      <a class="mieru-link" href="https://mieru.sou-zou-do.com/" target="_blank" rel="noopener">MiERU →</a>
-    </div>
-
     <div class="news-section" id="newsSection">
       <div class="news-label">News</div>
       <ul class="news-list" id="newsList">
@@ -1271,6 +1266,11 @@
         <span class="philosophy-label">Vision</span>
         <p class="philosophy-title">「導線設計」を、経営戦略に昇華させる。</p>
         <p class="philosophy-desc">デザインの一手法から、あらゆる事業の成功に不可欠な「経営の当たり前」へと、導線設計の価値を高めていきます。</p>
+      </div>
+
+      <div class="philosophy-block" data-philosophy data-delay="2">
+        <span class="philosophy-label">Our Product</span>
+        <a class="mieru-link" href="https://mieru.sou-zou-do.com/" target="_blank" rel="noopener">MiERU →</a>
       </div>
     </div>
   </section>
@@ -1464,17 +1464,11 @@
           status.classList.add('visible');
           progressContainer.classList.add('visible');
 
-          // Show MiERU section
-          const mieruSection = document.getElementById('mieruSection');
-          setTimeout(() => {
-            mieruSection.classList.add('visible');
-          }, 300);
-
           // Show NEWS section
           const newsSection = document.getElementById('newsSection');
           setTimeout(() => {
             newsSection.classList.add('visible');
-          }, 500);
+          }, 300);
 
           // Start interactive mode
           startInteractiveMode();
