@@ -85,6 +85,12 @@
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
+    .section-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
     .section-title {
       font-size: clamp(1.8rem, 5vw, 3.5rem);
       font-weight: 600;
@@ -99,6 +105,101 @@
     .section-title.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Language Switch */
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+    }
+
+    .lang-switch.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 0.3rem 0.1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .lang-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .lang-btn:hover {
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      color: var(--text);
+    }
+
+    .lang-btn.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .lang-divider {
+      font-size: 0.7rem;
+      color: rgba(0,0,0,0.15);
+      user-select: none;
+    }
+
+    /* Text transition effect */
+    .label-text,
+    .value-text {
+      display: inline-block;
+      position: relative;
+    }
+
+    .label-text.switching,
+    .value-text.switching {
+      animation: textSwitch 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes textSwitch {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+        filter: blur(0);
+      }
+      40% {
+        opacity: 0;
+        transform: translateY(-8px) rotateX(-15deg);
+        filter: blur(2px);
+      }
+      60% {
+        opacity: 0;
+        transform: translateY(8px) rotateX(15deg);
+        filter: blur(2px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+        filter: blur(0);
+      }
     }
 
     .section-label {
@@ -225,6 +326,22 @@
         align-items: flex-start;
         gap: 0.5rem;
         margin-bottom: 2rem;
+      }
+
+      .section-title-row {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .lang-switch {
+        gap: 0.3rem;
+      }
+
+      .lang-btn {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.2rem;
       }
 
       .profile-grid {
@@ -797,43 +914,84 @@
     <div class="back-button" id="backButton">Back</div>
     <div class="company-inner">
       <div class="section-header">
-        <h2 class="section-title" data-profile>PROFILE</h2>
-        <span class="section-label" data-profile>Company Information</span>
+        <div class="section-title-row">
+          <h2 class="section-title" data-profile>PROFILE</h2>
+          <div class="lang-switch" data-profile>
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <span class="lang-divider">/</span>
+            <button class="lang-btn" data-lang="jp">JP</button>
+          </div>
+        </div>
+        <span class="section-label" data-profile>
+          <span class="label-text" data-en="Company Information" data-jp="会社情報">Company Information</span>
+        </span>
       </div>
 
       <div class="profile-grid">
         <div class="profile-item" data-profile data-delay="0">
-          <span class="profile-label">Company</span>
-          <div class="profile-value profile-value-lg">SOUZOUDO Inc.</div>
-          <div class="profile-value-sub">株式会社SOUZOUDO</div>
+          <span class="profile-label">
+            <span class="label-text" data-en="Company" data-jp="会社名">Company</span>
+          </span>
+          <div class="profile-value profile-value-lg">
+            <span class="value-text" data-en="SOUZOUDO Inc." data-jp="株式会社SOUZOUDO">SOUZOUDO Inc.</span>
+          </div>
+          <div class="profile-value-sub">
+            <span class="value-text" data-en="株式会社SOUZOUDO" data-jp="SOUZOUDO Inc.">株式会社SOUZOUDO</span>
+          </div>
         </div>
 
         <div class="profile-item" data-profile data-delay="1">
-          <span class="profile-label">Representative</span>
-          <div class="profile-value profile-value-lg">Yusaku Suzuki</div>
-          <div class="profile-value-sub">CEO</div>
+          <span class="profile-label">
+            <span class="label-text" data-en="Representative" data-jp="代表者">Representative</span>
+          </span>
+          <div class="profile-value profile-value-lg">
+            <span class="value-text" data-en="Yusaku Suzuki" data-jp="鈴木 優作">Yusaku Suzuki</span>
+          </div>
+          <div class="profile-value-sub">
+            <span class="value-text" data-en="CEO" data-jp="代表取締役">CEO</span>
+          </div>
         </div>
 
         <div class="profile-item" data-profile data-delay="2">
-          <span class="profile-label">Location</span>
-          <div class="profile-value">The Park House, Room 1505, 1-3-6 Misato, Misato City, Saitama Prefecture, 341-0024</div>
-          <div class="profile-value-sub">〒341-0024 埼玉県三郷市三郷１丁目3−6 ザ・パークハウス 1505号室</div>
+          <span class="profile-label">
+            <span class="label-text" data-en="Location" data-jp="所在地">Location</span>
+          </span>
+          <div class="profile-value">
+            <span class="value-text" data-en="The Park House, Room 1505, 1-3-6 Misato, Misato City, Saitama Prefecture, 341-0024" data-jp="〒341-0024 埼玉県三郷市三郷１丁目3−6 ザ・パークハウス 1505号室">The Park House, Room 1505, 1-3-6 Misato, Misato City, Saitama Prefecture, 341-0024</span>
+          </div>
+          <div class="profile-value-sub">
+            <span class="value-text" data-en="〒341-0024 埼玉県三郷市三郷１丁目3−6 ザ・パークハウス 1505号室" data-jp="The Park House, Room 1505">〒341-0024 埼玉県三郷市三郷１丁目3−6 ザ・パークハウス 1505号室</span>
+          </div>
         </div>
 
         <div class="profile-item" data-profile data-delay="3">
-          <span class="profile-label">Established</span>
-          <div class="profile-value profile-value-lg">2022.09.06</div>
+          <span class="profile-label">
+            <span class="label-text" data-en="Established" data-jp="設立">Established</span>
+          </span>
+          <div class="profile-value profile-value-lg">
+            <span class="value-text" data-en="2022.09.06" data-jp="2022年9月6日">2022.09.06</span>
+          </div>
         </div>
 
         <div class="profile-item" data-profile data-delay="4">
-          <span class="profile-label">Business</span>
-          <div class="profile-value">Customer Journey Design<br>Production Services<br>Consulting</div>
+          <span class="profile-label">
+            <span class="label-text" data-en="Business" data-jp="事業内容">Business</span>
+          </span>
+          <div class="profile-value">
+            <span class="value-text" data-en="Customer Journey Design<br>Production Services<br>Consulting" data-jp="カスタマージャーニーデザイン<br>制作サービス<br>コンサルティング">Customer Journey Design<br>Production Services<br>Consulting</span>
+          </div>
         </div>
 
         <div class="profile-item" data-profile data-delay="5">
-          <span class="profile-label">Hours</span>
-          <div class="profile-value profile-value-lg">10:00 — 18:00</div>
-          <div class="profile-value-sub">Weekdays Only</div>
+          <span class="profile-label">
+            <span class="label-text" data-en="Hours" data-jp="営業時間">Hours</span>
+          </span>
+          <div class="profile-value profile-value-lg">
+            <span class="value-text" data-en="10:00 — 18:00" data-jp="10:00 〜 18:00">10:00 — 18:00</span>
+          </div>
+          <div class="profile-value-sub">
+            <span class="value-text" data-en="Weekdays Only" data-jp="平日のみ">Weekdays Only</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1380,6 +1538,41 @@
 
     // Fetch news on page load
     fetchLatestNews();
+
+    // Language Switch
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const textElements = document.querySelectorAll('.label-text, .value-text');
+    let currentLang = 'en';
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        if (lang === currentLang) return;
+
+        // Update active button
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Animate text switch with staggered timing
+        textElements.forEach((el, index) => {
+          setTimeout(() => {
+            el.classList.add('switching');
+
+            // Change text at the midpoint of animation
+            setTimeout(() => {
+              el.innerHTML = el.dataset[lang];
+            }, 240);
+
+            // Remove animation class after complete
+            setTimeout(() => {
+              el.classList.remove('switching');
+            }, 600);
+          }, index * 30); // Staggered delay for wave effect
+        });
+
+        currentLang = lang;
+      });
+    });
   </script>
 </body>
 </html>
