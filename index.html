@@ -866,6 +866,102 @@
       }
     }
 
+    /* Philosophy Section */
+    .philosophy-section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 4rem;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 51;
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .philosophy-section.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .philosophy-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .philosophy-block {
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .philosophy-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .philosophy-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .philosophy-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .philosophy-title {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .philosophy-desc {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      line-height: 2;
+      color: var(--text-light);
+      max-width: 600px;
+    }
+
+    /* Back button for philosophy */
+    .philosophy-section .back-button {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .philosophy-section {
+        padding: 5rem 1.5rem 2rem;
+        overflow-y: auto;
+      }
+
+      .philosophy-block {
+        margin-bottom: 3rem;
+      }
+
+      .philosophy-title {
+        font-size: clamp(1rem, 4vw, 1.4rem);
+      }
+
+      .philosophy-desc {
+        font-size: 0.75rem;
+      }
+    }
+
     /* Floating shapes */
     .floating-shapes {
       position: fixed;
@@ -1000,6 +1096,7 @@
   <div class="page-indicator" id="pageIndicator">
     <div class="indicator-dot active" data-page="0" title="Home"></div>
     <div class="indicator-dot" data-page="1" title="Profile"></div>
+    <div class="indicator-dot" data-page="2" title="Philosophy"></div>
   </div>
 
   <!-- Scroll Hint -->
@@ -1106,13 +1203,13 @@
 
         <div class="profile-item" data-profile data-delay="1">
           <span class="profile-label">
-            <span class="label-text" data-en="Representative" data-jp="代表者">Representative</span>
+            <span class="label-text" data-en="Representative" data-jp="代表取締役">Representative</span>
           </span>
           <div class="profile-value profile-value-lg">
             <span class="value-text" data-en="Yusaku Suzuki" data-jp="鈴木 優作">Yusaku Suzuki</span>
           </div>
           <div class="profile-value-sub">
-            <span class="value-text" data-en="CEO" data-jp="代表取締役">CEO</span>
+            <span class="value-text" data-en="CEO" data-jp="">CEO</span>
           </div>
         </div>
 
@@ -1157,6 +1254,23 @@
             <span class="value-text" data-en="Weekdays Only" data-jp="平日のみ">Weekdays Only</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy Section -->
+  <section class="philosophy-section" id="philosophySection">
+    <div class="back-button" id="philosophyBackButton">Back</div>
+    <div class="philosophy-inner">
+      <div class="philosophy-block" data-philosophy data-delay="0">
+        <span class="philosophy-label">Mission</span>
+        <p class="philosophy-title">想像と創造の力で、<br>社会と人の"流れ"を美しくする。</p>
+      </div>
+
+      <div class="philosophy-block" data-philosophy data-delay="1">
+        <span class="philosophy-label">Vision</span>
+        <p class="philosophy-title">「導線設計」を、経営戦略に昇華させる。</p>
+        <p class="philosophy-desc">デザインの一手法から、あらゆる事業の成功に不可欠な「経営の当たり前」へと、導線設計の価値を高めていきます。</p>
       </div>
     </div>
   </section>
@@ -1522,68 +1636,82 @@
     }
     floatShapes();
 
-    // Profile section elements
+    // Section elements
     const companySection = document.getElementById('companySection');
+    const philosophySection = document.getElementById('philosophySection');
     const backButton = document.getElementById('backButton');
+    const philosophyBackButton = document.getElementById('philosophyBackButton');
     const profileElements = document.querySelectorAll('[data-profile]');
+    const philosophyElements = document.querySelectorAll('[data-philosophy]');
 
-    let isProfileVisible = false;
+    let currentPage = 0; // 0: Home, 1: Profile, 2: Philosophy
     let isTransitioning = false;
-    let canNavigate = false; // Only allow navigation after assembly
+    let canNavigate = false;
 
-    // Show profile section
-    function showProfile() {
-      if (isProfileVisible || isTransitioning || !canNavigate) return;
+    // Navigate to specific page
+    function navigateToPage(targetPage) {
+      if (isTransitioning || !canNavigate || targetPage === currentPage) return;
+      if (targetPage < 0 || targetPage > 2) return;
+
       isTransitioning = true;
-      isProfileVisible = true;
+      const previousPage = currentPage;
 
-      // Fade out the main container elements
-      container.style.transition = 'opacity 0.6s ease';
-      container.style.opacity = '0';
+      // Hide current page
+      if (previousPage === 0) {
+        container.style.transition = 'opacity 0.6s ease';
+        container.style.opacity = '0';
+      } else if (previousPage === 1) {
+        profileElements.forEach(el => el.classList.remove('visible'));
+        backButton.classList.remove('visible');
+        setTimeout(() => companySection.classList.remove('visible'), 400);
+      } else if (previousPage === 2) {
+        philosophyElements.forEach(el => el.classList.remove('visible'));
+        philosophyBackButton.classList.remove('visible');
+        setTimeout(() => philosophySection.classList.remove('visible'), 400);
+      }
 
+      // Show target page after transition
       setTimeout(() => {
-        // Show company section
-        companySection.classList.add('visible');
-
-        // Animate profile elements with stagger
-        setTimeout(() => {
-          profileElements.forEach((el, i) => {
-            const delay = el.dataset.delay || 0;
-            setTimeout(() => {
-              el.classList.add('visible');
-            }, delay * 80);
-          });
-
-          // Show back button
-          backButton.classList.add('visible');
-          isTransitioning = false;
-        }, 200);
-      }, 600);
-    }
-
-    // Hide profile and go back to main
-    function hideProfile() {
-      if (!isProfileVisible || isTransitioning) return;
-      isTransitioning = true;
-
-      // Remove visible from all profile elements
-      profileElements.forEach(el => el.classList.remove('visible'));
-      backButton.classList.remove('visible');
-
-      setTimeout(() => {
-        companySection.classList.remove('visible');
-
-        setTimeout(() => {
+        if (targetPage === 0) {
           container.style.opacity = '1';
-          isProfileVisible = false;
+          currentPage = 0;
           isTransitioning = false;
-        }, 200);
-      }, 400);
+        } else if (targetPage === 1) {
+          companySection.classList.add('visible');
+          setTimeout(() => {
+            profileElements.forEach((el, i) => {
+              const delay = el.dataset.delay || 0;
+              setTimeout(() => el.classList.add('visible'), delay * 80);
+            });
+            backButton.classList.add('visible');
+            currentPage = 1;
+            isTransitioning = false;
+          }, 200);
+        } else if (targetPage === 2) {
+          philosophySection.classList.add('visible');
+          setTimeout(() => {
+            philosophyElements.forEach((el, i) => {
+              const delay = el.dataset.delay || 0;
+              setTimeout(() => el.classList.add('visible'), delay * 150);
+            });
+            philosophyBackButton.classList.add('visible');
+            currentPage = 2;
+            isTransitioning = false;
+          }, 200);
+        }
+
+        updateIndicator(targetPage);
+      }, previousPage === 0 ? 600 : 500);
     }
 
-    backButton.addEventListener('click', hideProfile);
+    // Legacy functions for compatibility
+    function showProfile() { navigateToPage(1); }
+    function hideProfile() { navigateToPage(0); }
 
-    // Wheel navigation (scroll down = show profile, scroll up = hide profile)
+    backButton.addEventListener('click', () => navigateToPage(0));
+    philosophyBackButton.addEventListener('click', () => navigateToPage(1));
+
+    // Wheel navigation (scroll down = next page, scroll up = previous page)
     let wheelAccumulator = 0;
     const wheelThreshold = 50;
 
@@ -1592,11 +1720,11 @@
 
       wheelAccumulator += e.deltaY;
 
-      if (wheelAccumulator > wheelThreshold && !isProfileVisible) {
-        showProfile();
+      if (wheelAccumulator > wheelThreshold) {
+        navigateToPage(currentPage + 1);
         wheelAccumulator = 0;
-      } else if (wheelAccumulator < -wheelThreshold && isProfileVisible) {
-        hideProfile();
+      } else if (wheelAccumulator < -wheelThreshold) {
+        navigateToPage(currentPage - 1);
         wheelAccumulator = 0;
       }
 
@@ -1621,12 +1749,12 @@
       touchEndY = e.changedTouches[0].clientY;
       const deltaY = touchStartY - touchEndY;
 
-      if (deltaY > swipeThreshold && !isProfileVisible) {
-        // Swipe up = show profile
-        showProfile();
-      } else if (deltaY < -swipeThreshold && isProfileVisible) {
-        // Swipe down = hide profile
-        hideProfile();
+      if (deltaY > swipeThreshold) {
+        // Swipe up = next page
+        navigateToPage(currentPage + 1);
+      } else if (deltaY < -swipeThreshold) {
+        // Swipe down = previous page
+        navigateToPage(currentPage - 1);
       }
     }, { passive: true });
 
@@ -1652,8 +1780,8 @@
         dot.classList.toggle('active', i === pageIndex);
       });
 
-      // Hide scroll hint when on profile page
-      if (pageIndex === 1) {
+      // Hide scroll hint when not on home page
+      if (pageIndex !== 0) {
         scrollHint.classList.add('hidden');
       } else {
         scrollHint.classList.remove('hidden');
@@ -1664,35 +1792,16 @@
     indicatorDots.forEach(dot => {
       dot.addEventListener('click', () => {
         if (!canNavigate || isTransitioning) return;
-
         const page = parseInt(dot.dataset.page);
-        if (page === 0 && isProfileVisible) {
-          hideProfile();
-        } else if (page === 1 && !isProfileVisible) {
-          showProfile();
-        }
+        navigateToPage(page);
       });
     });
 
-    // Click scroll hint to go to profile
+    // Click scroll hint to go to next page
     scrollHint.addEventListener('click', () => {
-      if (!canNavigate || isTransitioning || isProfileVisible) return;
-      showProfile();
+      if (!canNavigate || isTransitioning) return;
+      navigateToPage(currentPage + 1);
     });
-
-    // Update showProfile to update indicator
-    const originalShowProfile = showProfile;
-    showProfile = function() {
-      originalShowProfile();
-      updateIndicator(1);
-    };
-
-    // Update hideProfile to update indicator
-    const originalHideProfile = hideProfile;
-    hideProfile = function() {
-      originalHideProfile();
-      updateIndicator(0);
-    };
 
     // Supabase Configuration for NEWS
     const SUPABASE_URL = 'https://kiatkhhncmyfczlgkyrf.supabase.co';
