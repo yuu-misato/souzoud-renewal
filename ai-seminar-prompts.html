@@ -518,6 +518,238 @@
       color: var(--text-lighter);
     }
 
+    /* ===== Survey Results ===== */
+    .survey-section {
+      padding: 4rem 5vw 5rem;
+      background: var(--white);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .survey-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .survey-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .survey-lead {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+    }
+
+    .survey-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: var(--bg);
+      border-radius: 8px;
+    }
+
+    .stat-number {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-number span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .survey-chart-group {
+      margin-bottom: 3rem;
+    }
+
+    .survey-chart-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-label {
+      font-size: 0.8rem;
+      color: var(--text);
+      width: 200px;
+      flex-shrink: 0;
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .chart-bar-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chart-bar {
+      height: 28px;
+      border-radius: 4px;
+      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .chart-bar.accent { background: var(--accent); }
+    .chart-bar.dark { background: var(--text); }
+    .chart-bar.gemini-color { background: var(--gemini); }
+    .chart-bar.notebook-color { background: var(--notebook); }
+
+    .chart-value {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    /* Donut chart (CSS only) */
+    .donut-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .donut-chart {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: var(--white);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donut-center .donut-num {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .donut-center .donut-text {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-label {
+      font-size: 0.8rem;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .legend-value {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    /* Voice cards */
+    .survey-voices {
+      margin-top: 3rem;
+    }
+
+    .survey-voices h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .voice-card {
+      padding: 1.5rem;
+      background: var(--bg);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .voice-card.concern {
+      border-left-color: var(--text-lighter);
+    }
+
+    .voice-card p {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    .voice-card .voice-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--text-lighter);
+      margin-top: 0.5rem;
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
       .nav {
@@ -534,6 +766,29 @@
       .notebook-guide,
       .cta-section {
         padding: 3.5rem 1.5rem;
+      }
+
+      .survey-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .survey-section {
+        padding: 3.5rem 1.5rem;
+      }
+
+      .chart-label {
+        width: 120px;
+        font-size: 0.7rem;
+      }
+
+      .donut-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .voice-grid {
+        grid-template-columns: 1fr;
       }
 
       .mindset-grid {
@@ -573,6 +828,193 @@
       Gemini と NotebookLM を活用して、授業準備や校務をもっとスムーズに。<br>
       すぐに使えるプロンプト例とあわせて、AIとの向き合い方もご紹介します。
     </p>
+  </section>
+
+  <!-- Survey Results -->
+  <section class="survey-section">
+    <div class="survey-inner">
+      <p class="section-label reveal">Survey Results</p>
+      <h2 class="survey-title reveal">事前アンケートの結果</h2>
+      <p class="survey-lead reveal">勉強会に先立ち、先生方にアンケートにご協力いただきました。<br>皆さんの声をもとに、今回の内容を組み立てています。</p>
+
+      <!-- Stats -->
+      <div class="survey-stats reveal">
+        <div class="stat-card">
+          <div class="stat-number">12<span>名</span></div>
+          <div class="stat-label">回答者数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">83<span>%</span></div>
+          <div class="stat-label">AIを触ったことがある</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">9<span>/12</span></div>
+          <div class="stat-label">「指導案づくり」に活用したい</div>
+        </div>
+      </div>
+
+      <!-- AI Experience Donut -->
+      <div class="survey-chart-group reveal">
+        <h3>AIツールの使用経験</h3>
+        <div class="donut-grid">
+          <div class="donut-chart" style="background: conic-gradient(
+            var(--text) 0deg 30deg,
+            var(--text-lighter) 30deg 120deg,
+            var(--accent) 120deg 300deg,
+            var(--accent-dark) 300deg 360deg
+          );">
+            <div class="donut-center">
+              <span class="donut-num">12</span>
+              <span class="donut-text">回答</span>
+            </div>
+          </div>
+          <div class="donut-legend">
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--accent);"></span>
+              <span class="legend-label">たまに使っている</span>
+              <span class="legend-value">6名</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--text-lighter);"></span>
+              <span class="legend-label">少しだけ触ったことがある</span>
+              <span class="legend-value">3名</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--text);"></span>
+              <span class="legend-label">まったく使ったことがない</span>
+              <span class="legend-value">2名</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--accent-dark);"></span>
+              <span class="legend-label">日常的に使っている</span>
+              <span class="legend-value">1名</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Usage Scenes Bar Chart -->
+      <div class="survey-chart-group reveal">
+        <h3>AIを活用してみたい場面（複数選択）</h3>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">授業の指導案づくり</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar dark" style="width: 75%;"></div>
+            <span class="chart-value">9名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">教材・プリント作成</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 67%;"></div>
+            <span class="chart-value">8名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">通知表・所見の文章作成</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 67%;"></div>
+            <span class="chart-value">8名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">学級通信・おたより</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 50%;"></div>
+            <span class="chart-value">6名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">校務分掌の事務作業</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 42%;"></div>
+            <span class="chart-value">5名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">自分自身の学びや研修</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 42%;"></div>
+            <span class="chart-value">5名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">テスト問題の作成</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 25%;"></div>
+            <span class="chart-value">3名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">保護者対応の文面作成</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 17%;"></div>
+            <span class="chart-value">2名</span>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <span class="chart-label">児童への個別対応の相談</span>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar accent" style="width: 8%;"></div>
+            <span class="chart-value">1名</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Voices -->
+      <div class="survey-voices reveal">
+        <h3>先生方の声 ― 期待していること</h3>
+        <div class="voice-grid">
+          <div class="voice-card">
+            <p>AIの活用方法（具体的な教育場面での活用方法）、AIの育て方（良いプロンプトのコツや設定の仕方）</p>
+            <div class="voice-tag">5年担当</div>
+          </div>
+          <div class="voice-card">
+            <p>時短になる働き方を見つけたいです。</p>
+            <div class="voice-tag">1年担当</div>
+          </div>
+          <div class="voice-card">
+            <p>プロンプトというものがよく分からないので知りたいです。</p>
+            <div class="voice-tag">3年担当</div>
+          </div>
+          <div class="voice-card">
+            <p>AIでどんなことができるのかをいろいろと教えてほしいです。働き方改革に繋がるといいなと思います。</p>
+            <div class="voice-tag">2年担当</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="survey-voices reveal" style="margin-top: 2.5rem;">
+        <h3>先生方の声 ― 気になっていること</h3>
+        <div class="voice-grid">
+          <div class="voice-card concern">
+            <p>GPTがさらっと嘘をつくので、どこまで信じていいかわかりません。Geminiは割と正直に「わからない」と言ってくれるのでいいのですが。</p>
+            <div class="voice-tag">1年担当</div>
+          </div>
+          <div class="voice-card concern">
+            <p>情報漏洩。プライバシーなどの保護。著作権関係。</p>
+            <div class="voice-tag">4年担当</div>
+          </div>
+          <div class="voice-card concern">
+            <p>どの範囲でAIを使ってよいのか不安です。所見などは、賛否両論なので…</p>
+            <div class="voice-tag">5年担当</div>
+          </div>
+          <div class="voice-card concern">
+            <p>確かな情報なのかが分からないことが多いので、より正確な情報が聞ける方法を知りたいです。</p>
+            <div class="voice-tag">3年担当</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Mindset -->
