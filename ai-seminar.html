@@ -621,6 +621,40 @@
       color: var(--text-light);
     }
 
+    .prep-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .prep-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 100px;
+      transition: all 0.25s ease;
+    }
+
+    .prep-links a:hover {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+    }
+
+    .prep-links a svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
     /* ===== CTA Section ===== */
     .cta-section {
       padding: 7rem 5vw;
@@ -792,14 +826,13 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-photo">
-      <!-- TODO: ヒーロー写真を差し替え（セミナーの雰囲気写真・人が学んでいる様子など） -->
-      <span class="photo-placeholder">Hero Photo</span>
+      <img src="images/hero-seminar.jpg" alt="セミナーで笑顔で学ぶ参加者たち">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-label">AI Seminar &mdash; Beginner</p>
-      <h1 class="hero-title">AIと一緒に、<br>未来の働き方を描こう。</h1>
-      <p class="hero-subtitle">初級・中級・上級の全3回で構成されたAI活用セミナー。<br>今回はその第1回、初級編を開催します。</p>
+      <h1 class="hero-title">AIと一緒に、<br>未来の教育を描こう。</h1>
+      <p class="hero-subtitle">小学校の先生のためのAI活用セミナー。<br>初級・中級・上級の全3回構成。今回は初級編を開催します。</p>
     </div>
     <div class="hero-scroll">
       <span class="hero-scroll-text">Scroll</span>
@@ -812,18 +845,18 @@
     <div class="reveal">
       <p class="section-label">About</p>
       <p class="message-lead">
-        「AIって何ができるの？」<br>
-        「自分の仕事にも使えるの？」<br><br>
-        そんな疑問を持っている方へ。<br>
+        「AIって授業に使えるの？」<br>
+        「忙しい毎日、少しでも楽になる？」<br><br>
+        そんな疑問を持っている先生方へ。<br>
         <strong>まずは知ることから、始めてみませんか。</strong>
       </p>
     </div>
     <div class="reveal reveal-delay-2">
       <p class="message-body">
-        この講座は、AIを触ったことがない方・使い始めたばかりの方のための初級編です。<br>
+        この講座は、AIを触ったことがない方・使い始めたばかりの先生のための初級編です。<br>
         難しい専門用語は使いません。<br>
-        実際にAIに触れながら、「これなら自分にもできそう」「仕事がもっと楽になるかも」と、<br>
-        明日からの働き方にワクワクできる時間をお届けします。
+        実際にAIに触れながら、「授業準備がもっと楽になるかも」「校務の効率が上がりそう」と、<br>
+        明日からの教育現場にワクワクできる時間をお届けします。
       </p>
     </div>
   </section>
@@ -831,12 +864,10 @@
   <!-- Photo Break -->
   <div class="photo-break-split reveal">
     <div class="photo-cell">
-      <!-- TODO: セミナーの雰囲気写真1（ワークショップ風景・笑顔で学ぶ参加者など） -->
-      <span class="photo-placeholder">Photo 1</span>
+      <img src="images/seminar-photo1.jpg" alt="笑顔で学ぶ参加者と講師">
     </div>
     <div class="photo-cell">
-      <!-- TODO: セミナーの雰囲気写真2（ディスカッション風景・PCを操作する参加者など） -->
-      <span class="photo-placeholder">Photo 2</span>
+      <img src="images/seminar-photo2.jpg" alt="ホワイトボードの前で説明する講師">
     </div>
   </div>
 
@@ -844,18 +875,15 @@
   <section class="speaker-section">
     <div class="speaker-inner">
       <div class="speaker-photo reveal">
-        <!-- TODO: 講師 鈴木優作のプロフィール写真 -->
-        <span class="photo-placeholder">Speaker Photo</span>
+        <img src="images/speaker-suzuki.jpg" alt="鈴木優作">
       </div>
       <div class="speaker-detail">
         <p class="section-label reveal">Speaker</p>
         <h2 class="speaker-name reveal reveal-delay-1">鈴木 優作</h2>
         <p class="speaker-name-en reveal reveal-delay-1">Yusaku Suzuki</p>
-        <p class="speaker-title reveal reveal-delay-2">株式会社SOUZOUDO<br>代表取締役 / CEO</p>
+        <p class="speaker-title reveal reveal-delay-2">株式会社SOUZOUDO 代表取締役<br>三郷市議会議員</p>
         <p class="speaker-bio reveal reveal-delay-3">
-          顧客導線設計・WEB制作を軸に、企業の「伝え方」をデザインする。<br>
-          AI活用を自らの業務に取り入れた実体験をもとに、<br>
-          現場目線でわかりやすくお伝えします。
+          AIを活用した業務効率化とマーケティングを専門とする株式会社SOUZOUDOの代表取締役。三郷市議会議員としても活動。自社の業務にAIを積極的に取り入れ、実際に成果を上げてきた実体験をもとに、現場目線でわかりやすくお伝えします。
         </p>
       </div>
     </div>
@@ -865,8 +893,8 @@
   <section class="curriculum-section">
     <div class="curriculum-header reveal">
       <p class="section-label">Curriculum</p>
-      <h2 class="curriculum-title">全3回のステップで、<br>AI活用を自分のものに。</h2>
-      <p class="curriculum-desc">初級編で基礎を学び、中級編で実務に活かし、上級編で自ら価値を生み出す。段階的に確実にスキルアップできるプログラムです。</p>
+      <h2 class="curriculum-title">まずは初級編から。<br>興味が湧いたら、その先へ。</h2>
+      <p class="curriculum-desc">本セミナーは全3回で構成されています。初級編だけでも十分な学びが得られます。もっと深めたいと思ったら、中級編・上級編へステップアップできます。</p>
     </div>
     <div class="curriculum-grid">
       <div class="curriculum-card is-current reveal">
@@ -878,13 +906,13 @@
       <div class="curriculum-card is-upcoming reveal reveal-delay-1">
         <div class="card-step">Step 02</div>
         <div class="card-level">中級編</div>
-        <div class="card-subtitle">業務効率を高める実践編</div>
+        <div class="card-subtitle">校務・授業準備を効率化する実践編</div>
         <span class="card-badge">Coming Soon</span>
       </div>
       <div class="curriculum-card is-upcoming reveal reveal-delay-2">
         <div class="card-step">Step 03</div>
         <div class="card-level">上級編</div>
-        <div class="card-subtitle">自ら新しいサービスを構築する</div>
+        <div class="card-subtitle">AIを活用した新しい学びを創る</div>
         <span class="card-badge">Coming Soon</span>
       </div>
     </div>
@@ -892,8 +920,7 @@
 
   <!-- Photo Break -->
   <div class="photo-break reveal">
-    <!-- TODO: セミナー風景の写真（講師が説明している様子など） -->
-    <span class="photo-placeholder">Photo &mdash; Seminar Scene</span>
+    <img src="images/seminar-scene.jpg" alt="笑顔でディスカッションするセミナー参加者たち">
   </div>
 
   <!-- Goal -->
@@ -904,13 +931,13 @@
       <ul class="goal-list">
         <li class="goal-item reveal">
           <div class="goal-number">01</div>
-          <div class="goal-text">AIを活用すれば業務改善ができるかも、という未来を描けるようになる</div>
-          <div class="goal-desc">日々の業務の中で「ここはAIに任せられそうだな」と気づける視点を身につけます。明日からの仕事の見え方が変わるはずです。</div>
+          <div class="goal-text">AIを活用すれば授業準備や校務がもっと楽になるかも、という未来を描けるようになる</div>
+          <div class="goal-desc">日々の教育現場で「ここはAIに任せられそうだな」と気づける視点を身につけます。授業づくりや事務作業の見え方が変わるはずです。</div>
         </li>
         <li class="goal-item reveal reveal-delay-2">
           <div class="goal-number">02</div>
           <div class="goal-text">プロンプトの作り方がわかるようになる</div>
-          <div class="goal-desc">AIから良い回答を引き出すための「聞き方のコツ」を、実践を交えながら学びます。すぐに使えるテクニックをお持ち帰りいただけます。</div>
+          <div class="goal-desc">AIから良い回答を引き出すための「聞き方のコツ」を、実践を交えながら学びます。授業や校務ですぐに使えるテクニックをお持ち帰りいただけます。</div>
         </li>
       </ul>
     </div>
@@ -928,6 +955,16 @@
           <div class="prep-content">
             <div class="prep-name">Google Gemini のダウンロード・登録</div>
             <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
+            <div class="prep-links">
+              <a href="https://apps.apple.com/us/app/google-gemini/id6477489729" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.bard" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
           </div>
         </li>
         <li class="prep-item reveal reveal-delay-1">
@@ -935,6 +972,16 @@
           <div class="prep-content">
             <div class="prep-name">NotebookLM のダウンロード・登録</div>
             <div class="prep-note">Googleが提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
+            <div class="prep-links">
+              <a href="https://apps.apple.com/us/app/google-notebooklm/id6737527615" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
           </div>
         </li>
         <li class="prep-item reveal reveal-delay-2">
@@ -942,6 +989,13 @@
           <div class="prep-content">
             <div class="prep-name">講師プロフィールの確認</div>
             <div class="prep-note">講師 鈴木優作のプロフィールを事前にご確認ください。当日の講座がよりスムーズになります。</div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-3">
+          <div class="prep-icon">💻</div>
+          <div class="prep-content">
+            <div class="prep-name">パソコンまたはスマートフォンをお持ちください</div>
+            <div class="prep-note">当日は実際にAIを操作しながら進めていきます。パソコン・スマートフォンのいずれかをご持参ください。</div>
           </div>
         </li>
       </ul>
@@ -958,7 +1012,7 @@
         事前のご質問や気になっていることを<br>
         お気軽にお送りください。
       </p>
-      <a href="#" class="cta-button">Googleフォームで回答する</a>
+      <a href="https://forms.gle/qmWzBvAXDKW2hLFZ7" target="_blank" rel="noopener" class="cta-button">Googleフォームで回答する</a>
       <p class="cta-note">回答は1分ほどで完了します</p>
     </div>
   </section>
