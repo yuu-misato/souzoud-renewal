@@ -621,6 +621,40 @@
       color: var(--text-light);
     }
 
+    .prep-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .prep-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 100px;
+      transition: all 0.25s ease;
+    }
+
+    .prep-links a:hover {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+    }
+
+    .prep-links a svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
     /* ===== CTA Section ===== */
     .cta-section {
       padding: 7rem 5vw;
@@ -925,6 +959,16 @@
           <div class="prep-content">
             <div class="prep-name">Google Gemini のダウンロード・登録</div>
             <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
+            <div class="prep-links">
+              <a href="https://apps.apple.com/us/app/google-gemini/id6477489729" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.bard" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
           </div>
         </li>
         <li class="prep-item reveal reveal-delay-1">
@@ -932,6 +976,16 @@
           <div class="prep-content">
             <div class="prep-name">NotebookLM のダウンロード・登録</div>
             <div class="prep-note">Googleが提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
+            <div class="prep-links">
+              <a href="https://apps.apple.com/us/app/google-notebooklm/id6737527615" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
           </div>
         </li>
         <li class="prep-item reveal reveal-delay-2">
@@ -939,6 +993,13 @@
           <div class="prep-content">
             <div class="prep-name">講師プロフィールの確認</div>
             <div class="prep-note">講師 鈴木優作のプロフィールを事前にご確認ください。当日の講座がよりスムーズになります。</div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-3">
+          <div class="prep-icon">💻</div>
+          <div class="prep-content">
+            <div class="prep-name">パソコンまたはスマートフォンをお持ちください</div>
+            <div class="prep-note">当日は実際にAIを操作しながら進めていきます。パソコン・スマートフォンのいずれかをご持参ください。</div>
           </div>
         </li>
       </ul>
