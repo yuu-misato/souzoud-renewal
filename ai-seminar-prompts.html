@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>学校で使えるプロンプト集 | AI活用勉強会 | SOUZOUDO Inc.</title>
+  <title>あなた専用の「副担任」をつくろう | AI活用勉強会 | SOUZOUDO Inc.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -822,11 +822,11 @@
 
   <!-- Page Header -->
   <section class="page-header">
-    <p class="section-label reveal">Prompt Guide</p>
-    <h1 class="reveal reveal-delay-1">学校で効果的に使える<br>プロンプト集</h1>
+    <p class="section-label reveal">AI Study Session &mdash; Beginner</p>
+    <h1 class="reveal reveal-delay-1">あなた専用の<br>「副担任」をつくろう。</h1>
     <p class="lead reveal reveal-delay-2">
-      Gemini と NotebookLM を活用して、授業準備や校務をもっとスムーズに。<br>
-      すぐに使えるプロンプト例とあわせて、AIとの向き合い方もご紹介します。
+      今日の勉強会のテーマは、AIを「あなただけの副担任」にすること。<br>
+      事前アンケートでいただいた声をもとに、内容を組み立てました。
     </p>
   </section>
 
@@ -1017,11 +1017,28 @@
     </div>
   </section>
 
+  <!-- Today's Theme -->
+  <section class="mindset-section" style="background: var(--text); color: var(--white);">
+    <div class="mindset-inner" style="text-align: center; max-width: 700px;">
+      <p class="section-label reveal" style="color: var(--accent);">Today's Theme</p>
+      <h2 class="mindset-title reveal" style="color: var(--white); font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.7;">
+        皆さんの声に共通していたのは<br>
+        「使ってみたいけど、どう使えばいいかわからない」<br>
+        ということ。
+      </h2>
+      <p class="reveal reveal-delay-1" style="font-size: 0.9rem; line-height: 2.2; color: rgba(255,255,255,0.6); margin-top: 2rem;">
+        今日の勉強会では、AIを<strong style="color: var(--accent);">あなた専用の「副担任」</strong>にする方法をお伝えします。<br>
+        指導案、教材、所見、通信 ―― 皆さんが「使いたい」と答えた場面で、<br>
+        すぐに実践できるプロンプトを一緒に体験していきましょう。
+      </p>
+    </div>
+  </section>
+
   <!-- Mindset -->
   <section class="mindset-section">
     <div class="mindset-inner">
       <p class="section-label reveal">Mindset</p>
-      <h2 class="mindset-title reveal">AIとの向き合い方</h2>
+      <h2 class="mindset-title reveal">「副担任」との付き合い方</h2>
 
       <div class="mindset-grid">
         <div class="mindset-card full-width reveal">
@@ -1400,14 +1417,129 @@ A4・1枚に収まる分量で、
     </div>
   </section>
 
+  <!-- Answers to Concerns -->
+  <section class="prompt-section" style="background: var(--bg);">
+    <div class="prompt-inner">
+      <p class="section-label reveal">Answers</p>
+      <h2 class="prompt-section-title reveal" style="font-size: clamp(1.3rem, 3vw, 1.8rem);">アンケートで寄せられた<br>不安・疑問にお答えします</h2>
+      <p class="prompt-section-desc reveal">事前アンケートで多く挙がった声に、一つひとつ向き合います。</p>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge" style="background: var(--text);">Q</span>
+          <h4>「AIが嘘をつく」「情報が正確かわからない」</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">AIが事実と異なる回答をすることがある、という不安の声が複数ありました。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Answer</div>
+            <pre>AIは「答えを知っている」のではなく、
+「それらしい答えを組み立てる」仕組みです。
+
+だからこそ使い分けが大切です：
+・答えが決まっている問い → 検索が得意
+・あなたのスキルを拡張する問い → AIが得意
+
+そしてNotebookLMなら、あなたがアップロードした
+資料だけをもとに回答するので、
+外部の不確かな情報が混ざりません。
+教育現場ではとても相性が良いツールです。</pre>
+          </div>
+          <div class="prompt-tip">
+            <span class="prompt-tip-icon">💡</span>
+            <p>AIの回答は「下書き」として受け取り、最終判断は必ず自分で。この意識があれば、安心して活用できます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge" style="background: var(--text);">Q</span>
+          <h4>「情報漏洩やプライバシーが心配」</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">児童の個人情報や校内資料をAIに入力して大丈夫なのか、という不安の声がありました。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Answer</div>
+            <pre>大切なポイントは2つです：
+
+1. 個人が特定できる情報は入力しない
+   → 児童名は「Aさん」など仮名にする
+   → 具体的な住所・連絡先は含めない
+
+2. NotebookLMは情報が外部に学習されない
+   → アップロードした資料はあなた専用
+   → 他のユーザーの回答に使われることはありません
+
+「副担任に相談する」感覚で使いつつ、
+個人情報だけは渡さない。これが基本ルールです。</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge" style="background: var(--text);">Q</span>
+          <h4>「所見にAIを使っていいの？」</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">通知表の所見でAIを使うことへの賛否が気になる、という声がありました。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Answer</div>
+            <pre>AIが書いた文章をそのまま使うのではなく、
+「たたき台」として活用する。これが大切です。
+
+児童の特徴やエピソードを伝えて下書きを作り、
+先生の目で確認・修正して仕上げる。
+
+最終的な言葉を選ぶのは、
+その子を一番知っている先生自身です。
+AIはその作業を効率化するパートナーであり、
+先生の代わりではありません。</pre>
+          </div>
+          <div class="prompt-tip">
+            <span class="prompt-tip-icon">💡</span>
+            <p>表現のバリエーションを広げたり、書き始めのきっかけを得る使い方であれば、多くの先生が自然に取り入れています。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge" style="background: var(--text);">Q</span>
+          <h4>「プロンプトがよくわからない」</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">プロンプトという言葉自体が馴染みがない、という声がありました。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Answer</div>
+            <pre>プロンプト = AIへの「お願いの仕方」です。
+
+副担任に仕事をお願いするとき、
+「いい感じにやっておいて」では伝わりませんよね。
+
+「3年生の算数で、かけ算の筆算の確認テスト、
+ 基本10問と応用2問で、15分で解ける量で」
+
+これがプロンプトです。
+具体的に伝えるほど、良い結果が返ってきます。
+このページのプロンプト例を参考に、
+まずは1つ試してみてください。</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section">
     <div class="cta-inner reveal">
-      <p class="section-label" style="color: var(--accent);">Back to Top</p>
-      <h2 class="cta-title">まずは1つ、試してみてください。</h2>
+      <p class="section-label" style="color: var(--accent);">Let's Try</p>
+      <h2 class="cta-title">今日からあなたの「副担任」を<br>育てていきましょう。</h2>
       <p class="cta-desc">
-        うまくいかなくても大丈夫。<br>
-        AIとのやりとりは、繰り返すほど上手になります。
+        最初は上手くいかなくても大丈夫。<br>
+        接する回数が増えるほど、AIはあなたの意図を汲み取れるようになります。<br>
+        まずは1つ、試してみてください。
       </p>
       <a href="/ai-seminar" class="cta-button">勉強会トップへ戻る</a>
     </div>
