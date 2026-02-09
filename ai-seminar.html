@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI活用セミナーのご案内 | SOUZOUDO Inc.</title>
+  <title>AI活用セミナー | SOUZOUDO Inc.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,70 +15,197 @@
     }
 
     :root {
-      --bg: #f8f7f5;
-      --text: #1a1a1a;
-      --text-light: #6b6b6b;
-      --accent: #1a1a1a;
+      --bg: #f6f4f0;
+      --bg-warm: #eee9e1;
+      --text: #2c2820;
+      --text-light: #8a8070;
+      --text-lighter: #b0a594;
+      --accent: #c4a87a;
+      --accent-dark: #a68b5b;
+      --white: #ffffff;
     }
 
     html {
       font-size: 16px;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Noto Sans JP', 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Header */
-    .header {
+    /* ===== Navigation ===== */
+    .nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      padding: 1.5rem 2rem;
+      padding: 1.25rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
-      background: var(--bg);
+      z-index: 200;
+      mix-blend-mode: difference;
     }
 
-    .logo {
+    .nav-logo {
       font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .nav-back {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-decoration: none;
-      color: var(--text);
+      color: var(--white);
+      opacity: 0.7;
       transition: opacity 0.3s ease;
     }
 
-    .logo:hover {
-      opacity: 0.6;
+    .nav-back:hover {
+      opacity: 1;
     }
 
-    .back-link {
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      color: var(--text-light);
-      transition: color 0.3s ease;
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
     }
 
-    .back-link:hover {
-      color: var(--text);
+    .hero-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Main Container */
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 8rem 2rem 4rem;
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
+    .photo-placeholder {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      border: 1px dashed var(--text-lighter);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(44, 40, 32, 0.1) 0%,
+        rgba(44, 40, 32, 0.0) 30%,
+        rgba(44, 40, 32, 0.3) 70%,
+        rgba(44, 40, 32, 0.75) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 5vw 5vh;
+      color: var(--white);
+    }
+
+    .hero-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+      font-weight: 300;
+      line-height: 1.8;
+      opacity: 0.8;
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 3rem;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.2s forwards;
+    }
+
+    .hero-scroll-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      writing-mode: vertical-lr;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.6; }
+      50% { transform: scaleY(0.6); opacity: 1; }
+    }
+
+    /* ===== Shared ===== */
     @keyframes fadeUp {
       to {
         opacity: 1;
@@ -86,572 +213,781 @@
       }
     }
 
-    /* Page Label */
-    .page-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
+    .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Page Title */
-    .page-title {
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .section-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
       font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.6;
-      color: var(--text);
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-    }
-
-    /* Content */
-    .content {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
-    }
-
-    .content p {
-      font-size: 0.95rem;
-      line-height: 2;
-      color: var(--text);
-      margin-bottom: 1.75rem;
-    }
-
-    .content p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Section */
-    .section {
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-size: 0.65rem;
-      font-family: 'Instrument Sans', sans-serif;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--accent-dark);
       margin-bottom: 1.25rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
-    /* Speaker */
-    .speaker {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 1.5rem 0;
+    /* ===== Message Section ===== */
+    .message {
+      padding: 8rem 5vw;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    .speaker-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.04);
+    .message-lead {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 500;
+      line-height: 2.2;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .message-lead strong {
+      font-weight: 600;
+      background: linear-gradient(transparent 60%, rgba(196, 168, 122, 0.2) 60%);
+    }
+
+    .message-body {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      line-height: 2.2;
+      color: var(--text-light);
+    }
+
+    /* ===== Full Photo Break ===== */
+    .photo-break {
+      width: 100%;
+      height: 50vh;
+      min-height: 300px;
+      background: var(--bg-warm);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.4rem;
-      color: var(--text-light);
+      overflow: hidden;
+      position: relative;
     }
 
-    .speaker-info {
-      flex: 1;
+    .photo-break img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-break-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 50vh;
+      min-height: 300px;
+    }
+
+    .photo-break-split .photo-cell {
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .photo-break-split .photo-cell:first-child {
+      border-right: 3px solid var(--bg);
+    }
+
+    .photo-break-split .photo-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ===== Speaker Section ===== */
+    .speaker-section {
+      padding: 7rem 5vw;
+      background: var(--white);
+    }
+
+    .speaker-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .speaker-photo {
+      aspect-ratio: 3 / 4;
+      background: var(--bg-warm);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speaker-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .speaker-detail {
+      padding: 1rem 0;
     }
 
     .speaker-name {
-      font-size: 1.1rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
     }
 
-    .speaker-role {
-      font-size: 0.75rem;
+    .speaker-name-en {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-lighter);
+      margin-bottom: 1.5rem;
+    }
+
+    .speaker-title {
+      font-size: 0.85rem;
+      font-weight: 400;
       color: var(--text-light);
-      line-height: 1.5;
+      line-height: 1.8;
+      margin-bottom: 2rem;
     }
 
-    /* Goal List */
+    .speaker-bio {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+    }
+
+    /* ===== Curriculum Section ===== */
+    .curriculum-section {
+      padding: 7rem 5vw;
+    }
+
+    .curriculum-header {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+
+    .curriculum-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .curriculum-desc {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .curriculum-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .curriculum-card {
+      padding: 2.5rem 2rem;
+      position: relative;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-right: none;
+      transition: all 0.4s ease;
+    }
+
+    .curriculum-card:last-child {
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .curriculum-card.is-current {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+      transform: scale(1.03);
+      z-index: 2;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(44, 40, 32, 0.15);
+    }
+
+    .card-step {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .curriculum-card.is-current .card-step {
+      color: var(--accent);
+    }
+
+    .curriculum-card:not(.is-current) .card-step {
+      color: var(--text-lighter);
+    }
+
+    .card-level {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .curriculum-card.is-current .card-subtitle {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .curriculum-card:not(.is-current) .card-subtitle {
+      color: var(--text-light);
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 100px;
+    }
+
+    .curriculum-card.is-current .card-badge {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .curriculum-card.is-upcoming .card-badge {
+      background: rgba(0,0,0,0.04);
+      color: var(--text-lighter);
+    }
+
+    .curriculum-card.is-upcoming {
+      opacity: 0.5;
+    }
+
+    /* ===== Goal Section ===== */
+    .goal-section {
+      padding: 7rem 5vw;
+      background: var(--white);
+    }
+
+    .goal-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .goal-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 3.5rem;
+    }
+
     .goal-list {
       list-style: none;
-      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
     }
 
     .goal-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .goal-item:last-child {
-      border-bottom: none;
+      padding: 2rem 0;
+      border-top: 2px solid var(--accent);
     }
 
     .goal-number {
       font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: var(--text-light);
-      flex-shrink: 0;
-      padding-top: 0.15rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bg-warm);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
     }
 
     .goal-text {
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-weight: 500;
       line-height: 1.8;
       color: var(--text);
+      margin-bottom: 0.75rem;
     }
 
     .goal-desc {
-      margin-top: 0.4rem;
       font-size: 0.8rem;
-      line-height: 1.7;
+      line-height: 1.9;
       color: var(--text-light);
     }
 
-    /* Preparation List */
+    /* ===== Preparation Section ===== */
+    .prep-section {
+      padding: 7rem 5vw;
+    }
+
+    .prep-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .prep-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .prep-lead {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+    }
+
     .prep-list {
       list-style: none;
-      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
     .prep-item {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
-    .prep-item:last-child {
-      border-bottom: none;
+    .prep-item:first-child {
+      border-top: 1px solid rgba(0,0,0,0.06);
     }
 
-    .prep-check {
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid rgba(0,0,0,0.2);
-      border-radius: 3px;
+    .prep-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      margin-top: 0.15rem;
+      font-size: 1.1rem;
+      margin-top: 0.1rem;
     }
 
-    .prep-text {
+    .prep-content {
+      flex: 1;
+    }
+
+    .prep-name {
       font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--text);
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
     }
 
     .prep-note {
       font-size: 0.8rem;
-      color: var(--text-light);
-      margin-top: 0.25rem;
-    }
-
-    /* Curriculum Roadmap */
-    .curriculum {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-bottom: 2rem;
-    }
-
-    .curriculum-step {
-      padding: 1.5rem 1.25rem;
-      border: 1px solid rgba(0,0,0,0.06);
-      border-right: none;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .curriculum-step:last-child {
-      border-right: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .curriculum-step.is-upcoming {
-      opacity: 0.4;
-    }
-
-    .curriculum-step.is-current {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
-    }
-
-    .curriculum-step.is-current + .curriculum-step {
-      border-left-color: var(--text);
-    }
-
-    .step-number {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    .curriculum-step.is-current .step-number {
-      color: rgba(255,255,255,0.5);
-    }
-
-    .curriculum-step:not(.is-current) .step-number {
+      line-height: 1.8;
       color: var(--text-light);
     }
 
-    .step-label {
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.35rem;
-    }
-
-    .step-desc {
-      font-size: 0.7rem;
-      line-height: 1.6;
-    }
-
-    .curriculum-step.is-current .step-desc {
-      color: rgba(255,255,255,0.6);
-    }
-
-    .curriculum-step:not(.is-current) .step-desc {
-      color: var(--text-light);
-    }
-
-    .step-badge {
-      display: inline-block;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.5rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.5rem;
-      border-radius: 2px;
-      margin-top: 0.75rem;
-    }
-
-    .curriculum-step.is-current .step-badge {
-      background: rgba(255,255,255,0.15);
-      color: var(--bg);
-    }
-
-    .curriculum-step.is-upcoming .step-badge {
-      background: rgba(0,0,0,0.04);
-      color: var(--text-light);
-    }
-
-    /* Connector arrows between steps */
-    .curriculum-step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: -6px;
-      top: 50%;
-      transform: translateY(-50%) rotate(45deg);
-      width: 10px;
-      height: 10px;
-      border-right: 1px solid rgba(0,0,0,0.06);
-      border-top: 1px solid rgba(0,0,0,0.06);
-      background: var(--bg);
-      z-index: 1;
-    }
-
-    .curriculum-step.is-current::after {
-      background: var(--text);
-      border-color: var(--text);
-    }
-
-    @media (max-width: 600px) {
-      .curriculum {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .curriculum-step {
-        border-right: 1px solid rgba(0,0,0,0.06);
-        border-bottom: none;
-      }
-
-      .curriculum-step:last-child {
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-      }
-
-      .curriculum-step.is-current {
-        border-color: var(--text);
-      }
-
-      .curriculum-step:not(:last-child)::after {
-        right: 50%;
-        top: auto;
-        bottom: -6px;
-        transform: translateX(50%) rotate(135deg);
-      }
-    }
-
-    /* CTA - Google Form */
+    /* ===== CTA Section ===== */
     .cta-section {
-      margin-top: 3rem;
-      padding: 2.5rem;
-      background: rgba(0,0,0,0.02);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 4px;
+      padding: 7rem 5vw;
+      background: var(--text);
+      color: var(--white);
       text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .cta-title {
-      font-size: 1rem;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
     }
 
     .cta-desc {
-      font-size: 0.85rem;
-      line-height: 1.8;
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2.5rem;
     }
 
     .cta-button {
       display: inline-block;
-      font-family: 'Noto Sans JP', 'Instrument Sans', sans-serif;
-      font-size: 0.8rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.05em;
-      color: var(--bg);
-      background: var(--text);
+      color: var(--text);
+      background: var(--accent);
       text-decoration: none;
-      padding: 0.85rem 2.5rem;
-      border-radius: 3px;
-      transition: opacity 0.3s ease;
+      padding: 1rem 3rem;
+      border-radius: 100px;
+      transition: all 0.3s ease;
     }
 
     .cta-button:hover {
-      opacity: 0.75;
+      background: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     }
 
-    /* Back to Home */
-    .back-to-home {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(0,0,0,0.06);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+    .cta-note {
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
     }
 
-    .back-to-home a {
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .back-to-home a:hover {
-      color: var(--text);
-    }
-
-    /* Footer */
+    /* ===== Footer ===== */
     .footer {
-      margin-top: 6rem;
-      padding: 2rem;
-      text-align: center;
+      padding: 3rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .footer-text {
+    .footer-logo {
       font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--text-light);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--text);
+      text-decoration: none;
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .header {
+    .footer-copy {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--text-lighter);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav {
         padding: 1rem 1.5rem;
       }
 
-      .container {
-        padding: 6rem 1.5rem 3rem;
+      .hero-content {
+        padding: 0 1.5rem 4vh;
       }
 
-      .speaker {
-        flex-direction: column;
-        align-items: flex-start;
+      .hero-scroll {
+        right: 1.5rem;
+      }
+
+      .message {
+        padding: 5rem 1.5rem;
+      }
+
+      .speaker-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .speaker-photo {
+        aspect-ratio: 4 / 3;
+        max-height: 300px;
+      }
+
+      .speaker-section,
+      .curriculum-section,
+      .goal-section,
+      .prep-section,
+      .cta-section {
+        padding: 5rem 1.5rem;
+      }
+
+      .curriculum-grid {
+        grid-template-columns: 1fr;
         gap: 1rem;
       }
 
-      .cta-section {
-        padding: 2rem 1.5rem;
+      .curriculum-card {
+        border-right: 1px solid rgba(0,0,0,0.06);
+        border-radius: 4px;
       }
 
-      .content p {
-        font-size: 0.9rem;
-        line-height: 1.9;
+      .curriculum-card.is-current {
+        transform: scale(1);
+      }
+
+      .goal-list {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .photo-break {
+        height: 35vh;
+        min-height: 220px;
+      }
+
+      .photo-break-split {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .photo-break-split .photo-cell {
+        height: 35vh;
+        min-height: 200px;
+      }
+
+      .photo-break-split .photo-cell:first-child {
+        border-right: none;
+        border-bottom: 3px solid var(--bg);
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <a href="/" class="logo">SOUZOUDO</a>
-    <a href="/" class="back-link">&larr; Back to Home</a>
-  </header>
 
-  <!-- Main Container -->
-  <main class="container">
-    <!-- Label -->
-    <p class="page-label">Seminar</p>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">SOUZOUDO</a>
+    <a href="/" class="nav-back">&larr; HOME</a>
+  </nav>
 
-    <!-- Title -->
-    <h1 class="page-title">AI活用セミナーのご案内<br>― 初級編 ―</h1>
-
-    <!-- Content -->
-    <div class="content">
-
-      <!-- Intro -->
-      <div class="section">
-        <p>
-          この度、SOUZOUDO主催によるAI活用セミナーを開催いたします。<br>
-          本セミナーは<strong>初級・中級・上級</strong>の全3編で構成されており、段階的にAI活用スキルを身につけていただける講座です。
-        </p>
-        <p>
-          今回はその第1回、<strong>初級編</strong>を開催します。AIに触れたことがない方・使い始めたばかりの方を対象に、基礎から丁寧にお伝えします。
-        </p>
-      </div>
-
-      <!-- Speaker -->
-      <div class="section">
-        <h2 class="section-title">Speaker</h2>
-        <div class="speaker">
-          <div class="speaker-icon">S</div>
-          <div class="speaker-info">
-            <div class="speaker-name">鈴木 優作</div>
-            <div class="speaker-role">株式会社SOUZOUDO 代表取締役 / CEO</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Curriculum -->
-      <div class="section">
-        <h2 class="section-title">Curriculum &mdash; 全3回の構成</h2>
-        <div class="curriculum">
-          <div class="curriculum-step is-current">
-            <div class="step-number">Step 01</div>
-            <div class="step-label">初級編</div>
-            <div class="step-desc">AIを知り、未来を描く</div>
-            <span class="step-badge">Now &mdash; 今回はここ</span>
-          </div>
-          <div class="curriculum-step is-upcoming">
-            <div class="step-number">Step 02</div>
-            <div class="step-label">中級編</div>
-            <div class="step-desc">業務効率を高める実践編</div>
-            <span class="step-badge">Coming Soon</span>
-          </div>
-          <div class="curriculum-step is-upcoming">
-            <div class="step-number">Step 03</div>
-            <div class="step-label">上級編</div>
-            <div class="step-desc">自ら新しいサービスを構築する</div>
-            <span class="step-badge">Coming Soon</span>
-          </div>
-        </div>
-        <p>
-          初級編では、AIをまだ使ったことがない方や少し触った程度の方を対象に、基礎から丁寧にお伝えします。専門知識は一切不要ですので、お気軽にご参加ください。
-        </p>
-      </div>
-
-      <!-- Goal -->
-      <div class="section">
-        <h2 class="section-title">Goal</h2>
-        <ul class="goal-list">
-          <li class="goal-item">
-            <span class="goal-number">01</span>
-            <div>
-              <div class="goal-text">AIを活用すれば業務改善ができるかも、という未来を描けるようになる</div>
-              <div class="goal-desc">日々の業務の中で「ここはAIに任せられそうだな」と気づける視点を身につけます。明日からの仕事の見え方が変わるはずです。</div>
-            </div>
-          </li>
-          <li class="goal-item">
-            <span class="goal-number">02</span>
-            <div>
-              <div class="goal-text">プロンプト（AIへの指示文）の作り方がわかるようになる</div>
-              <div class="goal-desc">AIから良い回答を引き出すための「聞き方のコツ」を、実践を交えながら学びます。すぐに使えるテクニックをお持ち帰りいただけます。</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Preparation -->
-      <div class="section">
-        <h2 class="section-title">Preparation &mdash; 事前準備のお願い</h2>
-        <p>当日スムーズに進行するために、以下の事前準備をお願いいたします。</p>
-        <ul class="prep-list">
-          <li class="prep-item">
-            <div class="prep-check"></div>
-            <div>
-              <div class="prep-text">Google Gemini のダウンロード・登録</div>
-              <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
-            </div>
-          </li>
-          <li class="prep-item">
-            <div class="prep-check"></div>
-            <div>
-              <div class="prep-text">NotebookLM のダウンロード・登録</div>
-              <div class="prep-note">Google が提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
-            </div>
-          </li>
-          <li class="prep-item">
-            <div class="prep-check"></div>
-            <div>
-              <div class="prep-text">講師プロフィールの確認</div>
-              <div class="prep-note">講師 鈴木優作のプロフィールを事前にご確認ください。当日の講座がよりスムーズになります。</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-photo">
+      <!-- TODO: ヒーロー写真を差し替え（セミナーの雰囲気写真・人が学んでいる様子など） -->
+      <span class="photo-placeholder">Hero Photo</span>
     </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-label">AI Seminar &mdash; Beginner</p>
+      <h1 class="hero-title">AIと一緒に、<br>未来の働き方を描こう。</h1>
+      <p class="hero-subtitle">初級・中級・上級の全3回で構成されたAI活用セミナー。<br>今回はその第1回、初級編を開催します。</p>
+    </div>
+    <div class="hero-scroll">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
 
-    <!-- CTA - Google Form -->
-    <div class="cta-section">
-      <h2 class="cta-title">事前アンケート</h2>
+  <!-- Message -->
+  <section class="message">
+    <div class="reveal">
+      <p class="section-label">About</p>
+      <p class="message-lead">
+        「AIって何ができるの？」<br>
+        「自分の仕事にも使えるの？」<br><br>
+        そんな疑問を持っている方へ。<br>
+        <strong>まずは知ることから、始めてみませんか。</strong>
+      </p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p class="message-body">
+        この講座は、AIを触ったことがない方・使い始めたばかりの方のための初級編です。<br>
+        難しい専門用語は使いません。<br>
+        実際にAIに触れながら、「これなら自分にもできそう」「仕事がもっと楽になるかも」と、<br>
+        明日からの働き方にワクワクできる時間をお届けします。
+      </p>
+    </div>
+  </section>
+
+  <!-- Photo Break -->
+  <div class="photo-break-split reveal">
+    <div class="photo-cell">
+      <!-- TODO: セミナーの雰囲気写真1（ワークショップ風景・笑顔で学ぶ参加者など） -->
+      <span class="photo-placeholder">Photo 1</span>
+    </div>
+    <div class="photo-cell">
+      <!-- TODO: セミナーの雰囲気写真2（ディスカッション風景・PCを操作する参加者など） -->
+      <span class="photo-placeholder">Photo 2</span>
+    </div>
+  </div>
+
+  <!-- Speaker -->
+  <section class="speaker-section">
+    <div class="speaker-inner">
+      <div class="speaker-photo reveal">
+        <!-- TODO: 講師 鈴木優作のプロフィール写真 -->
+        <span class="photo-placeholder">Speaker Photo</span>
+      </div>
+      <div class="speaker-detail">
+        <p class="section-label reveal">Speaker</p>
+        <h2 class="speaker-name reveal reveal-delay-1">鈴木 優作</h2>
+        <p class="speaker-name-en reveal reveal-delay-1">Yusaku Suzuki</p>
+        <p class="speaker-title reveal reveal-delay-2">株式会社SOUZOUDO<br>代表取締役 / CEO</p>
+        <p class="speaker-bio reveal reveal-delay-3">
+          顧客導線設計・WEB制作を軸に、企業の「伝え方」をデザインする。<br>
+          AI活用を自らの業務に取り入れた実体験をもとに、<br>
+          現場目線でわかりやすくお伝えします。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum -->
+  <section class="curriculum-section">
+    <div class="curriculum-header reveal">
+      <p class="section-label">Curriculum</p>
+      <h2 class="curriculum-title">全3回のステップで、<br>AI活用を自分のものに。</h2>
+      <p class="curriculum-desc">初級編で基礎を学び、中級編で実務に活かし、上級編で自ら価値を生み出す。段階的に確実にスキルアップできるプログラムです。</p>
+    </div>
+    <div class="curriculum-grid">
+      <div class="curriculum-card is-current reveal">
+        <div class="card-step">Step 01</div>
+        <div class="card-level">初級編</div>
+        <div class="card-subtitle">AIを知り、未来を描く</div>
+        <span class="card-badge">今回はここ</span>
+      </div>
+      <div class="curriculum-card is-upcoming reveal reveal-delay-1">
+        <div class="card-step">Step 02</div>
+        <div class="card-level">中級編</div>
+        <div class="card-subtitle">業務効率を高める実践編</div>
+        <span class="card-badge">Coming Soon</span>
+      </div>
+      <div class="curriculum-card is-upcoming reveal reveal-delay-2">
+        <div class="card-step">Step 03</div>
+        <div class="card-level">上級編</div>
+        <div class="card-subtitle">自ら新しいサービスを構築する</div>
+        <span class="card-badge">Coming Soon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Break -->
+  <div class="photo-break reveal">
+    <!-- TODO: セミナー風景の写真（講師が説明している様子など） -->
+    <span class="photo-placeholder">Photo &mdash; Seminar Scene</span>
+  </div>
+
+  <!-- Goal -->
+  <section class="goal-section">
+    <div class="goal-inner">
+      <p class="section-label reveal">Goal</p>
+      <h2 class="goal-title reveal">この講座で得られること</h2>
+      <ul class="goal-list">
+        <li class="goal-item reveal">
+          <div class="goal-number">01</div>
+          <div class="goal-text">AIを活用すれば業務改善ができるかも、という未来を描けるようになる</div>
+          <div class="goal-desc">日々の業務の中で「ここはAIに任せられそうだな」と気づける視点を身につけます。明日からの仕事の見え方が変わるはずです。</div>
+        </li>
+        <li class="goal-item reveal reveal-delay-2">
+          <div class="goal-number">02</div>
+          <div class="goal-text">プロンプトの作り方がわかるようになる</div>
+          <div class="goal-desc">AIから良い回答を引き出すための「聞き方のコツ」を、実践を交えながら学びます。すぐに使えるテクニックをお持ち帰りいただけます。</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Preparation -->
+  <section class="prep-section">
+    <div class="prep-inner">
+      <p class="section-label reveal">Preparation</p>
+      <h2 class="prep-title reveal">事前準備のお願い</h2>
+      <p class="prep-lead reveal">当日スムーズに進行するために、以下の準備をお願いいたします。</p>
+      <ul class="prep-list">
+        <li class="prep-item reveal">
+          <div class="prep-icon">G</div>
+          <div class="prep-content">
+            <div class="prep-name">Google Gemini のダウンロード・登録</div>
+            <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-1">
+          <div class="prep-icon">N</div>
+          <div class="prep-content">
+            <div class="prep-name">NotebookLM のダウンロード・登録</div>
+            <div class="prep-note">Googleが提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-2">
+          <div class="prep-icon">P</div>
+          <div class="prep-content">
+            <div class="prep-name">講師プロフィールの確認</div>
+            <div class="prep-note">講師 鈴木優作のプロフィールを事前にご確認ください。当日の講座がよりスムーズになります。</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <p class="section-label" style="color: var(--accent);">Pre-Survey</p>
+      <h2 class="cta-title">事前に聞きたいことはありますか？</h2>
       <p class="cta-desc">
         セミナーをより充実した内容にするために、<br>
-        事前に聞きたいことやご質問がございましたら<br>
-        以下のフォームからお送りください。
+        事前のご質問や気になっていることを<br>
+        お気軽にお送りください。
       </p>
       <a href="#" class="cta-button">Googleフォームで回答する</a>
+      <p class="cta-note">回答は1分ほどで完了します</p>
     </div>
-
-    <!-- Back to Home -->
-    <div class="back-to-home">
-      <a href="/">&larr; ホームへ戻る</a>
-    </div>
-  </main>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <p class="footer-text">&copy; 2026 SOUZOUDO Inc.</p>
+    <a href="/" class="footer-logo">SOUZOUDO</a>
+    <span class="footer-copy">&copy; 2026 SOUZOUDO Inc.</span>
   </footer>
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    function checkReveal() {
+      const windowHeight = window.innerHeight;
+      const triggerPoint = windowHeight * 0.85;
+
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < triggerPoint) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkReveal, { passive: true });
+    window.addEventListener('load', checkReveal);
+    checkReveal();
+  </script>
 </body>
 </html>
