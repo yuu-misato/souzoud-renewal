@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI活用セミナーのご案内 | SOUZOUDO Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f7f5;
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --accent: #1a1a1a;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .logo {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s ease;
+    }
+
+    .logo:hover {
+      opacity: 0.6;
+    }
+
+    .back-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Page Label */
+    .page-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+    }
+
+    /* Content */
+    .content {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    }
+
+    .content p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+
+    .content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 0.65rem;
+      font-family: 'Instrument Sans', sans-serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Speaker */
+    .speaker {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+    }
+
+    .speaker-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.4rem;
+      color: var(--text-light);
+    }
+
+    .speaker-info {
+      flex: 1;
+    }
+
+    .speaker-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .speaker-role {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Goal List */
+    .goal-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .goal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .goal-item:last-child {
+      border-bottom: none;
+    }
+
+    .goal-number {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      flex-shrink: 0;
+      padding-top: 0.15rem;
+    }
+
+    .goal-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .goal-desc {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+
+    /* Preparation List */
+    .prep-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .prep-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .prep-item:last-child {
+      border-bottom: none;
+    }
+
+    .prep-check {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(0,0,0,0.2);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .prep-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .prep-note {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    /* Level Badge */
+    .level-badge {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 0.4rem 0.8rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* CTA - Google Form */
+    .cta-section {
+      margin-top: 3rem;
+      padding: 2.5rem;
+      background: rgba(0,0,0,0.02);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 4px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    }
+
+    .cta-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Noto Sans JP', 'Instrument Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--bg);
+      background: var(--text);
+      text-decoration: none;
+      padding: 0.85rem 2.5rem;
+      border-radius: 3px;
+      transition: opacity 0.3s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.75;
+    }
+
+    /* Back to Home */
+    .back-to-home {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+    }
+
+    .back-to-home a {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .back-to-home a:hover {
+      color: var(--text);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 6rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header {
+        padding: 1rem 1.5rem;
+      }
+
+      .container {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .speaker {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .cta-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .content p {
+        font-size: 0.9rem;
+        line-height: 1.9;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="/" class="logo">SOUZOUDO</a>
+    <a href="/" class="back-link">&larr; Back to Home</a>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Label -->
+    <p class="page-label">Seminar</p>
+
+    <!-- Title -->
+    <h1 class="page-title">AI活用セミナーのご案内<br>― 初級編 ―</h1>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Intro -->
+      <div class="section">
+        <p>
+          この度、SOUZOUDO主催によるAI活用セミナーを開催いたします。<br>
+          今回は<strong>初級編</strong>として、AIに触れたことがない方・使い始めたばかりの方を対象に、基礎から丁寧にお伝えする内容です。
+        </p>
+        <p>
+          「AIって何ができるの？」「自分の業務にも活かせるの？」そんな疑問をお持ちの方にぴったりのセミナーです。
+        </p>
+      </div>
+
+      <!-- Speaker -->
+      <div class="section">
+        <h2 class="section-title">Speaker</h2>
+        <div class="speaker">
+          <div class="speaker-icon">S</div>
+          <div class="speaker-info">
+            <div class="speaker-name">鈴木 優作</div>
+            <div class="speaker-role">株式会社SOUZOUDO 代表取締役 / CEO</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level -->
+      <div class="section">
+        <h2 class="section-title">Level</h2>
+        <span class="level-badge">Beginner &mdash; 初級編</span>
+        <p>
+          AIをまだ使ったことがない方や、少し触った程度の方を対象にした初級レベルの勉強会です。専門知識は一切不要ですので、お気軽にご参加ください。
+        </p>
+      </div>
+
+      <!-- Goal -->
+      <div class="section">
+        <h2 class="section-title">Goal</h2>
+        <ul class="goal-list">
+          <li class="goal-item">
+            <span class="goal-number">01</span>
+            <div>
+              <div class="goal-text">AIを活用すれば業務改善ができるかも、という未来を描けるようになる</div>
+              <div class="goal-desc">日々の業務の中で「ここはAIに任せられそうだな」と気づける視点を身につけます。明日からの仕事の見え方が変わるはずです。</div>
+            </div>
+          </li>
+          <li class="goal-item">
+            <span class="goal-number">02</span>
+            <div>
+              <div class="goal-text">プロンプト（AIへの指示文）の作り方がわかるようになる</div>
+              <div class="goal-desc">AIから良い回答を引き出すための「聞き方のコツ」を、実践を交えながら学びます。すぐに使えるテクニックをお持ち帰りいただけます。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Preparation -->
+      <div class="section">
+        <h2 class="section-title">Preparation &mdash; 事前準備のお願い</h2>
+        <p>当日スムーズに進行するために、以下の事前準備をお願いいたします。</p>
+        <ul class="prep-list">
+          <li class="prep-item">
+            <div class="prep-check"></div>
+            <div>
+              <div class="prep-text">Google Gemini のダウンロード・登録</div>
+              <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
+            </div>
+          </li>
+          <li class="prep-item">
+            <div class="prep-check"></div>
+            <div>
+              <div class="prep-text">NotebookLM のダウンロード・登録</div>
+              <div class="prep-note">Google が提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
+            </div>
+          </li>
+          <li class="prep-item">
+            <div class="prep-check"></div>
+            <div>
+              <div class="prep-text">講師プロフィールの確認</div>
+              <div class="prep-note">講師 鈴木優作のプロフィールを事前にご確認ください。当日の講座がよりスムーズになります。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- CTA - Google Form -->
+    <div class="cta-section">
+      <h2 class="cta-title">事前アンケート</h2>
+      <p class="cta-desc">
+        セミナーをより充実した内容にするために、<br>
+        事前に聞きたいことやご質問がございましたら<br>
+        以下のフォームからお送りください。
+      </p>
+      <a href="#" class="cta-button">Googleフォームで回答する</a>
+    </div>
+
+    <!-- Back to Home -->
+    <div class="back-to-home">
+      <a href="/">&larr; ホームへ戻る</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">&copy; 2026 SOUZOUDO Inc.</p>
+  </footer>
+</body>
+</html>
