@@ -266,18 +266,142 @@
       margin-top: 0.25rem;
     }
 
-    /* Level Badge */
-    .level-badge {
-      display: inline-block;
+    /* Curriculum Roadmap */
+    .curriculum {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-bottom: 2rem;
+    }
+
+    .curriculum-step {
+      padding: 1.5rem 1.25rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-right: none;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .curriculum-step:last-child {
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .curriculum-step.is-upcoming {
+      opacity: 0.4;
+    }
+
+    .curriculum-step.is-current {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .curriculum-step.is-current + .curriculum-step {
+      border-left-color: var(--text);
+    }
+
+    .step-number {
       font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .curriculum-step.is-current .step-number {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .curriculum-step:not(.is-current) .step-number {
       color: var(--text-light);
-      padding: 0.4rem 0.8rem;
-      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .step-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+    }
+
+    .step-desc {
+      font-size: 0.7rem;
+      line-height: 1.6;
+    }
+
+    .curriculum-step.is-current .step-desc {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .curriculum-step:not(.is-current) .step-desc {
+      color: var(--text-light);
+    }
+
+    .step-badge {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.5rem;
       border-radius: 2px;
-      margin-bottom: 1.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .curriculum-step.is-current .step-badge {
+      background: rgba(255,255,255,0.15);
+      color: var(--bg);
+    }
+
+    .curriculum-step.is-upcoming .step-badge {
+      background: rgba(0,0,0,0.04);
+      color: var(--text-light);
+    }
+
+    /* Connector arrows between steps */
+    .curriculum-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      border-right: 1px solid rgba(0,0,0,0.06);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      background: var(--bg);
+      z-index: 1;
+    }
+
+    .curriculum-step.is-current::after {
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .curriculum {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .curriculum-step {
+        border-right: 1px solid rgba(0,0,0,0.06);
+        border-bottom: none;
+      }
+
+      .curriculum-step:last-child {
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+
+      .curriculum-step.is-current {
+        border-color: var(--text);
+      }
+
+      .curriculum-step:not(:last-child)::after {
+        right: 50%;
+        top: auto;
+        bottom: -6px;
+        transform: translateX(50%) rotate(135deg);
+      }
     }
 
     /* CTA - Google Form */
@@ -409,10 +533,10 @@
       <div class="section">
         <p>
           この度、SOUZOUDO主催によるAI活用セミナーを開催いたします。<br>
-          今回は<strong>初級編</strong>として、AIに触れたことがない方・使い始めたばかりの方を対象に、基礎から丁寧にお伝えする内容です。
+          本セミナーは<strong>初級・中級・上級</strong>の全3編で構成されており、段階的にAI活用スキルを身につけていただける講座です。
         </p>
         <p>
-          「AIって何ができるの？」「自分の業務にも活かせるの？」そんな疑問をお持ちの方にぴったりのセミナーです。
+          今回はその第1回、<strong>初級編</strong>を開催します。AIに触れたことがない方・使い始めたばかりの方を対象に、基礎から丁寧にお伝えします。
         </p>
       </div>
 
@@ -428,12 +552,31 @@
         </div>
       </div>
 
-      <!-- Level -->
+      <!-- Curriculum -->
       <div class="section">
-        <h2 class="section-title">Level</h2>
-        <span class="level-badge">Beginner &mdash; 初級編</span>
+        <h2 class="section-title">Curriculum &mdash; 全3回の構成</h2>
+        <div class="curriculum">
+          <div class="curriculum-step is-current">
+            <div class="step-number">Step 01</div>
+            <div class="step-label">初級編</div>
+            <div class="step-desc">AIを知り、未来を描く</div>
+            <span class="step-badge">Now &mdash; 今回はここ</span>
+          </div>
+          <div class="curriculum-step is-upcoming">
+            <div class="step-number">Step 02</div>
+            <div class="step-label">中級編</div>
+            <div class="step-desc">業務効率を高める実践編</div>
+            <span class="step-badge">Coming Soon</span>
+          </div>
+          <div class="curriculum-step is-upcoming">
+            <div class="step-number">Step 03</div>
+            <div class="step-label">上級編</div>
+            <div class="step-desc">自ら新しいサービスを構築する</div>
+            <span class="step-badge">Coming Soon</span>
+          </div>
+        </div>
         <p>
-          AIをまだ使ったことがない方や、少し触った程度の方を対象にした初級レベルの勉強会です。専門知識は一切不要ですので、お気軽にご参加ください。
+          初級編では、AIをまだ使ったことがない方や少し触った程度の方を対象に、基礎から丁寧にお伝えします。専門知識は一切不要ですので、お気軽にご参加ください。
         </p>
       </div>
 
