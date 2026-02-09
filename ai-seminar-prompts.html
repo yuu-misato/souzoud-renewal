@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学校で使えるプロンプト集 | AI活用勉強会 | SOUZOUDO Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f6f4f0;
+      --bg-warm: #eee9e1;
+      --text: #2c2820;
+      --text-light: #8a8070;
+      --text-lighter: #b0a594;
+      --accent: #c4a87a;
+      --accent-dark: #a68b5b;
+      --white: #ffffff;
+      --gemini: #4285f4;
+      --notebook: #0d652d;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== Navigation ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .nav-logo {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-back {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+
+    .nav-back:hover {
+      color: var(--text);
+    }
+
+    /* ===== Shared ===== */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .section-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ===== Page Header ===== */
+    .page-header {
+      padding: 8rem 5vw 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-header .lead {
+      font-size: 0.95rem;
+      line-height: 2.2;
+      color: var(--text-light);
+      max-width: 650px;
+    }
+
+    /* ===== Mindset Section ===== */
+    .mindset-section {
+      padding: 4rem 5vw 5rem;
+      background: var(--white);
+    }
+
+    .mindset-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .mindset-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    .mindset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .mindset-card {
+      padding: 2rem;
+      background: var(--bg);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .mindset-card.full-width {
+      grid-column: 1 / -1;
+      background: var(--text);
+      color: var(--white);
+    }
+
+    .mindset-card .card-number {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .mindset-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .mindset-card p {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+    }
+
+    .mindset-card.full-width p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ===== Tools Intro ===== */
+    .tools-section {
+      padding: 5rem 5vw;
+    }
+
+    .tools-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tools-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .tools-desc {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .tools-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .tool-card {
+      padding: 2.5rem 2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: var(--white);
+    }
+
+    .tool-card .tool-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .tool-card.gemini .tool-icon { background: var(--gemini); }
+    .tool-card.notebook .tool-icon { background: var(--notebook); }
+
+    .tool-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-card .tool-role {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    .tool-card.gemini .tool-role { color: var(--gemini); }
+    .tool-card.notebook .tool-role { color: var(--notebook); }
+
+    .tool-card p {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+    }
+
+    /* ===== Prompt Section ===== */
+    .prompt-section {
+      padding: 5rem 5vw;
+      background: var(--white);
+    }
+
+    .prompt-section:nth-child(even) {
+      background: var(--bg);
+    }
+
+    .prompt-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .prompt-section-title {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .prompt-section-desc {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .prompt-card {
+      margin-bottom: 2.5rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .prompt-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .prompt-tool-badge {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      color: var(--white);
+    }
+
+    .prompt-tool-badge.gemini { background: var(--gemini); }
+    .prompt-tool-badge.notebook { background: var(--notebook); }
+
+    .prompt-card-header h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .prompt-card-body {
+      padding: 1.5rem;
+    }
+
+    .prompt-scene {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 1.25rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--accent);
+    }
+
+    .prompt-block {
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .prompt-block-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .prompt-block pre {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .prompt-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: rgba(196, 168, 122, 0.08);
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .prompt-tip-icon {
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .prompt-tip p {
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: var(--text-light);
+    }
+
+    /* ===== Notebook Guide ===== */
+    .notebook-guide {
+      padding: 5rem 5vw;
+    }
+
+    .notebook-guide-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .notebook-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .notebook-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 2rem;
+      background: var(--white);
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .step-number {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--bg-warm);
+      flex-shrink: 0;
+      width: 40px;
+    }
+
+    .step-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 5rem 5vw;
+      background: var(--text);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-desc {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      background: var(--accent);
+      text-decoration: none;
+      padding: 1rem 3rem;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      padding: 3rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--text-lighter);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .page-header {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .mindset-section,
+      .tools-section,
+      .prompt-section,
+      .notebook-guide,
+      .cta-section {
+        padding: 3.5rem 1.5rem;
+      }
+
+      .mindset-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tools-compare {
+        grid-template-columns: 1fr;
+      }
+
+      .notebook-step {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">SOUZOUDO</a>
+    <a href="/ai-seminar" class="nav-back">&larr; 勉強会トップへ戻る</a>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <p class="section-label reveal">Prompt Guide</p>
+    <h1 class="reveal reveal-delay-1">学校で効果的に使える<br>プロンプト集</h1>
+    <p class="lead reveal reveal-delay-2">
+      Gemini と NotebookLM を活用して、授業準備や校務をもっとスムーズに。<br>
+      すぐに使えるプロンプト例とあわせて、AIとの向き合い方もご紹介します。
+    </p>
+  </section>
+
+  <!-- Mindset -->
+  <section class="mindset-section">
+    <div class="mindset-inner">
+      <p class="section-label reveal">Mindset</p>
+      <h2 class="mindset-title reveal">AIとの向き合い方</h2>
+
+      <div class="mindset-grid">
+        <div class="mindset-card full-width reveal">
+          <div class="card-number">Most Important</div>
+          <h3>AIは機械ではなく、あなたの「副担任」。</h3>
+          <p>AIを道具としてではなく、一緒に考えてくれるパートナーとして接してみてください。副担任に相談するように話しかけると、AIはあなたの意図を汲み取りやすくなります。</p>
+        </div>
+
+        <div class="mindset-card reveal">
+          <div class="card-number">01</div>
+          <h3>接する回数が多いほど、<br>ニュアンスが通じるようになる</h3>
+          <p>人間と同じです。繰り返しやりとりするほど、AIはあなたの意図や文脈を理解しやすくなります。最初からうまくいかなくても大丈夫。続けることが大事です。</p>
+        </div>
+
+        <div class="mindset-card reveal reveal-delay-1">
+          <div class="card-number">02</div>
+          <h3>与える情報が多いほど、<br>答えが出やすくなる</h3>
+          <p>「テストを作って」より「小3算数のわり算、20問、基本と応用半々で」と伝えた方が、圧倒的に良い結果が返ってきます。背景や条件を伝えましょう。</p>
+        </div>
+
+        <div class="mindset-card reveal">
+          <div class="card-number">03</div>
+          <h3>適切な質問をすれば、<br>適切な答えが出てくる</h3>
+          <p>AIの回答の質は、あなたの質問の質で決まります。曖昧に聞けば曖昧な答え、具体的に聞けば具体的な答え。まずは聞き方を意識してみてください。</p>
+        </div>
+
+        <div class="mindset-card reveal reveal-delay-1">
+          <div class="card-number">04</div>
+          <h3>検索とAI、<br>使い分けが大切</h3>
+          <p>「東京タワーの高さは？」のような答えが決まっている問いは検索が得意。「この単元の教え方をどう工夫しよう？」のような、あなたのスキルを拡張する問いにはAIが力を発揮します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="tools-section">
+    <div class="tools-inner">
+      <p class="section-label reveal">Tools</p>
+      <h2 class="tools-title reveal">2つのツールの使い分け</h2>
+      <p class="tools-desc reveal">Gemini と NotebookLM、それぞれの得意分野を理解して使い分けましょう。</p>
+
+      <div class="tools-compare">
+        <div class="tool-card gemini reveal">
+          <div class="tool-icon">G</div>
+          <h3>Gemini</h3>
+          <div class="tool-role">万能な相談相手</div>
+          <p>世界中の情報をもとに回答してくれるAI。アイデア出し、文章作成、教材づくりなど幅広い場面で活躍します。「何でも聞ける副担任」のイメージです。</p>
+        </div>
+
+        <div class="tool-card notebook reveal reveal-delay-1">
+          <div class="tool-icon">N</div>
+          <h3>NotebookLM</h3>
+          <div class="tool-role">あなたの知能を拡張する武器</div>
+          <p>通常のAIが世界の情報から回答するのに対し、NotebookLMはあなたがアップロードした資料だけをもとに回答します。学習指導要領や校内資料を読み込ませれば、あなた専用のAIアシスタントになります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt: 授業準備 -->
+  <section class="prompt-section">
+    <div class="prompt-inner">
+      <p class="section-label reveal">Scene 01</p>
+      <h2 class="prompt-section-title reveal">授業準備</h2>
+      <p class="prompt-section-desc reveal">指導案のたたき台、導入のアイデア、発問の工夫など。</p>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>授業の導入アイデアを考えてもらう</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">小学4年・理科「もののあたたまり方」の導入で、子どもたちの興味を引きたい。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>あなたは小学校の副担任です。
+小学4年生の理科「もののあたたまり方」の単元で、
+最初の5分間で子どもたちが「えっ、なんで？」と
+思わず声を上げるような導入を3パターン考えてください。
+
+条件：
+- 特別な道具がなくてもできるもの
+- 教室内で安全に実施できるもの
+- 子どもに問いかける形で終わるもの</pre>
+          </div>
+          <div class="prompt-tip">
+            <span class="prompt-tip-icon">💡</span>
+            <p>「あなたは〇〇です」と役割を伝えると、AIはその立場で考えてくれます。条件を箇条書きで伝えるのも効果的です。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge notebook">NotebookLM</span>
+          <h4>学習指導要領をもとに単元計画を作る</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">学習指導要領の該当部分をアップロード済みの状態で使います。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>アップロードした学習指導要領をもとに、
+小学5年生・社会「日本の工業生産」の
+単元計画（全8時間）のたたき台を作ってください。
+
+各時間ごとに以下をまとめてください：
+- 本時のめあて
+- 主な学習活動
+- 評価のポイント</pre>
+          </div>
+          <div class="prompt-tip">
+            <span class="prompt-tip-icon">💡</span>
+            <p>NotebookLMはアップロードした資料の内容だけをもとに回答します。学習指導要領を読み込ませておけば、指導要領に沿った回答が得られます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>発問のバリエーションを広げる</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">いつも同じような発問になりがち。子どもの思考を深める問いかけがほしい。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>あなたは小学校の副担任です。
+小学3年・国語「ちいちゃんのかげおくり」で、
+子どもたちの読みを深める発問を5つ考えてください。
+
+以下のレベルに分けてください：
+- 事実を確認する発問（2つ）
+- 登場人物の気持ちを考える発問（2つ）
+- 自分の考えを持たせる発問（1つ）</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt: 教材作成 -->
+  <section class="prompt-section">
+    <div class="prompt-inner">
+      <p class="section-label reveal">Scene 02</p>
+      <h2 class="prompt-section-title reveal">教材・プリント作成</h2>
+      <p class="prompt-section-desc reveal">ワークシート、テスト問題、ふりかえりカードなど。</p>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>単元テストを作る</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">小学3年の算数「かけ算の筆算」の確認テストを作りたい。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>小学3年生の算数「かけ算の筆算（2けた×1けた）」の
+確認テストを作ってください。
+
+構成：
+- 基本問題：10問（繰り上がりなし5問、繰り上がりあり5問）
+- 応用問題：2問（文章題）
+- 解答もあわせて作成
+
+児童が15分で解ける分量にしてください。</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>ふりかえりカードの項目を考える</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">学期末に使う、児童の自己評価用ふりかえりカードを作りたい。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>小学5年生の2学期末に使う「ふりかえりカード」の
+項目を考えてください。
+
+含めたい観点：
+- 学習面（自分から進んで取り組めたか）
+- 生活面（友だちとの関わり）
+- 自分の成長を感じたこと
+- 3学期にがんばりたいこと
+
+児童が書きやすいよう、選択式と自由記述を
+組み合わせた形にしてください。</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt: 通知表・所見 -->
+  <section class="prompt-section">
+    <div class="prompt-inner">
+      <p class="section-label reveal">Scene 03</p>
+      <h2 class="prompt-section-title reveal">通知表・所見の文章</h2>
+      <p class="prompt-section-desc reveal">所見のたたき台づくり。最終的な確認・調整は必ず先生ご自身で。</p>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>所見の文章のたたき台を作る</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">児童の特徴を伝えて、所見の下書きを作ってもらう。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>あなたは小学校の副担任です。
+以下の児童の特徴をもとに、通知表の所見文（150字程度）の
+たたき台を作ってください。
+
+児童の特徴：
+- 算数が得意で、友だちに教える場面が増えた
+- 係活動（新聞係）を意欲的に取り組んだ
+- 発表は苦手だが、ノートには自分の考えをしっかり書ける
+- 休み時間はドッジボールが好き
+
+トーン：前向きで温かみのある表現にしてください。</pre>
+          </div>
+          <div class="prompt-tip">
+            <span class="prompt-tip-icon">💡</span>
+            <p>児童の具体的なエピソードを入れるほど、それらしい文章になります。最終的には先生の目で確認・修正してください。AIはあくまで下書き作りのパートナーです。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>所見の表現のバリエーションを増やす</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">いつも同じ表現になりがちな所見を、バリエーション豊かにしたい。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>通知表の所見で使える表現のバリエーションを教えてください。
+
+以下のカテゴリに分けてください：
+- 学習意欲を褒める表現（5例）
+- 友だちとの関わりを褒める表現（5例）
+- 成長を伝える表現（5例）
+- 今後への期待を込める表現（5例）
+
+小学校の通知表にふさわしい、温かみのある表現でお願いします。</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt: 学級通信・おたより -->
+  <section class="prompt-section">
+    <div class="prompt-inner">
+      <p class="section-label reveal">Scene 04</p>
+      <h2 class="prompt-section-title reveal">学級通信・おたより</h2>
+      <p class="prompt-section-desc reveal">構成案や文章のたたき台づくりに。</p>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>学級通信の構成を考えてもらう</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">2月号の学級通信、何を書こうか迷っている。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>あなたは小学校の副担任です。
+小学2年生の学級通信（2月号）の構成案を考えてください。
+
+含めたい内容：
+- 節分にちなんだ話題
+- 3学期の子どもたちの成長
+- 来月の行事（6年生を送る会の練習）
+
+A4・1枚に収まる分量で、
+保護者が読みやすい構成にしてください。</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt: 校務 -->
+  <section class="prompt-section">
+    <div class="prompt-inner">
+      <p class="section-label reveal">Scene 05</p>
+      <h2 class="prompt-section-title reveal">校務・事務作業</h2>
+      <p class="prompt-section-desc reveal">会議資料、メール文面、アンケート作成など。</p>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge gemini">Gemini</span>
+          <h4>保護者向けメールの文面を作る</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">急な時間割変更を保護者に連絡したい。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>以下の内容で保護者向けの連絡メール文を作ってください。
+
+内容：
+- 来週水曜日の5時間目が体育から図工に変更
+- 理由は体育館の工事
+- 図工の持ち物（絵の具セット）を持たせてほしい
+
+トーン：丁寧だけど堅すぎない、親しみやすい文面で。
+長さ：200字以内。</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal">
+        <div class="prompt-card-header">
+          <span class="prompt-tool-badge notebook">NotebookLM</span>
+          <h4>校内研究の資料から要点をまとめる</h4>
+        </div>
+        <div class="prompt-card-body">
+          <div class="prompt-scene">校内研究の報告書や議事録をアップロード済みの状態で。</div>
+          <div class="prompt-block">
+            <div class="prompt-block-label">Prompt</div>
+            <pre>アップロードした校内研究の報告書をもとに、
+今年度の研究成果を以下の形式でまとめてください。
+
+- 研究テーマ
+- 取り組みの概要（3行程度）
+- 成果（箇条書き3つ）
+- 課題（箇条書き2つ）
+- 来年度への提言（1〜2文）
+
+職員会議で5分で共有できる分量にしてください。</pre>
+          </div>
+          <div class="prompt-tip">
+            <span class="prompt-tip-icon">💡</span>
+            <p>NotebookLMに校内の資料をアップロードすると、その資料に基づいた正確な要約ができます。外部の情報が混ざらないので安心です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NotebookLM Guide -->
+  <section class="notebook-guide">
+    <div class="notebook-guide-inner">
+      <p class="section-label reveal">NotebookLM Guide</p>
+      <h2 class="tools-title reveal">NotebookLMの活用ステップ</h2>
+      <p class="tools-desc reveal">あなた専用のAIアシスタントを作る手順です。</p>
+
+      <div class="notebook-steps">
+        <div class="notebook-step reveal">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h4>資料をアップロードする</h4>
+            <p>学習指導要領、校内研究資料、年間指導計画、教科書の内容など。PDFやGoogle Docsに対応しています。読み込ませた資料があなた専用の知識ベースになります。</p>
+          </div>
+        </div>
+        <div class="notebook-step reveal reveal-delay-1">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h4>資料について質問する</h4>
+            <p>「この単元の目標は？」「前回の研究で課題に挙がっていたことは？」など、アップロードした資料に対して自然に質問できます。回答には必ず出典が表示されます。</p>
+          </div>
+        </div>
+        <div class="notebook-step reveal reveal-delay-2">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h4>資料をもとにアウトプットを作る</h4>
+            <p>要約、比較表、指導案のたたき台など、資料の内容に基づいたアウトプットを依頼できます。外部情報が混ざらないため、公的文書のもとになる作業に向いています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <p class="section-label" style="color: var(--accent);">Back to Top</p>
+      <h2 class="cta-title">まずは1つ、試してみてください。</h2>
+      <p class="cta-desc">
+        うまくいかなくても大丈夫。<br>
+        AIとのやりとりは、繰り返すほど上手になります。
+      </p>
+      <a href="/ai-seminar" class="cta-button">勉強会トップへ戻る</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="/" class="footer-logo">SOUZOUDO</a>
+    <span class="footer-copy">&copy; 2026 SOUZOUDO Inc.</span>
+  </footer>
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    function checkReveal() {
+      const windowHeight = window.innerHeight;
+      const triggerPoint = windowHeight * 0.85;
+
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < triggerPoint) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkReveal, { passive: true });
+    window.addEventListener('load', checkReveal);
+    checkReveal();
+  </script>
+</body>
+</html>
