@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAGE_TITLE}} | SOUZOUDO Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f6f4f0;
+      --bg-warm: #eee9e1;
+      --text: #2c2820;
+      --text-light: #8a8070;
+      --text-lighter: #b0a594;
+      --accent: #c4a87a;
+      --accent-dark: #a68b5b;
+      --white: #ffffff;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== Navigation ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 200;
+      mix-blend-mode: difference;
+    }
+
+    .nav-logo {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .nav-back {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--white);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-back:hover {
+      opacity: 1;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      border: 1px dashed var(--text-lighter);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(44, 40, 32, 0.1) 0%,
+        rgba(44, 40, 32, 0.0) 30%,
+        rgba(44, 40, 32, 0.3) 70%,
+        rgba(44, 40, 32, 0.75) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 5vw 5vh;
+      color: var(--white);
+    }
+
+    .hero-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 3rem;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.2s forwards;
+    }
+
+    .hero-scroll-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      writing-mode: vertical-lr;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.6; }
+      50% { transform: scaleY(0.6); opacity: 1; }
+    }
+
+    /* ===== Shared ===== */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .section-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ===== Message Section ===== */
+    .message {
+      padding: 8rem 5vw;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .message-lead {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 500;
+      line-height: 2.2;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .message-lead strong {
+      font-weight: 600;
+      background: linear-gradient(transparent 60%, rgba(196, 168, 122, 0.2) 60%);
+    }
+
+    .message-body {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      line-height: 2.2;
+      color: var(--text-light);
+    }
+
+    /* ===== Full Photo Break ===== */
+    .photo-break {
+      width: 100%;
+      height: 50vh;
+      min-height: 300px;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-break img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-break-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 50vh;
+      min-height: 300px;
+    }
+
+    .photo-break-split .photo-cell {
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .photo-break-split .photo-cell:first-child {
+      border-right: 3px solid var(--bg);
+    }
+
+    .photo-break-split .photo-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ===== Speaker Section ===== */
+    .speaker-section {
+      padding: 7rem 5vw;
+      background: var(--white);
+    }
+
+    .speaker-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .speaker-photo {
+      aspect-ratio: 3 / 4;
+      background: var(--bg-warm);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speaker-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .speaker-detail {
+      padding: 1rem 0;
+    }
+
+    .speaker-name {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .speaker-name-en {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-lighter);
+      margin-bottom: 1.5rem;
+    }
+
+    .speaker-title {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .speaker-bio {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+    }
+
+    /* ===== Curriculum Section ===== */
+    .curriculum-section {
+      padding: 7rem 5vw;
+    }
+
+    .curriculum-header {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+
+    .curriculum-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .curriculum-desc {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .curriculum-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .curriculum-card {
+      padding: 2.5rem 2rem;
+      position: relative;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-right: none;
+      transition: all 0.4s ease;
+    }
+
+    .curriculum-card:last-child {
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .curriculum-card.is-current {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+      transform: scale(1.03);
+      z-index: 2;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(44, 40, 32, 0.15);
+    }
+
+    .card-step {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .curriculum-card.is-current .card-step {
+      color: var(--accent);
+    }
+
+    .curriculum-card:not(.is-current) .card-step {
+      color: var(--text-lighter);
+    }
+
+    .card-level {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .curriculum-card.is-current .card-subtitle {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .curriculum-card:not(.is-current) .card-subtitle {
+      color: var(--text-light);
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 100px;
+    }
+
+    .curriculum-card.is-current .card-badge {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .curriculum-card.is-upcoming .card-badge {
+      background: rgba(0,0,0,0.04);
+      color: var(--text-lighter);
+    }
+
+    .curriculum-card.is-upcoming {
+      opacity: 0.5;
+    }
+
+    /* ===== Goal Section ===== */
+    .goal-section {
+      padding: 7rem 5vw;
+      background: var(--white);
+    }
+
+    .goal-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .goal-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 3.5rem;
+    }
+
+    .goal-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .goal-item {
+      padding: 2rem 0;
+      border-top: 2px solid var(--accent);
+    }
+
+    .goal-number {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bg-warm);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .goal-text {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .goal-desc {
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: var(--text-light);
+    }
+
+    /* ===== Preparation Section ===== */
+    .prep-section {
+      padding: 7rem 5vw;
+    }
+
+    .prep-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .prep-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .prep-lead {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+    }
+
+    .prep-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .prep-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .prep-item:first-child {
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .prep-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      margin-top: 0.1rem;
+    }
+
+    .prep-content {
+      flex: 1;
+    }
+
+    .prep-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
+    }
+
+    .prep-note {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    .prep-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .prep-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 100px;
+      transition: all 0.25s ease;
+    }
+
+    .prep-links a:hover {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+    }
+
+    .prep-links a svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta-section {
+      padding: 7rem 5vw;
+      background: var(--text);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .cta-desc {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      background: var(--accent);
+      text-decoration: none;
+      padding: 1rem 3rem;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+
+    .cta-note {
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      padding: 3rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--text-lighter);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero-content {
+        padding: 0 1.5rem 4vh;
+      }
+
+      .hero-scroll {
+        right: 1.5rem;
+      }
+
+      .message {
+        padding: 5rem 1.5rem;
+      }
+
+      .speaker-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .speaker-photo {
+        aspect-ratio: 4 / 3;
+        max-height: 300px;
+      }
+
+      .speaker-section,
+      .curriculum-section,
+      .goal-section,
+      .prep-section,
+      .cta-section {
+        padding: 5rem 1.5rem;
+      }
+
+      .curriculum-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .curriculum-card {
+        border-right: 1px solid rgba(0,0,0,0.06);
+        border-radius: 4px;
+      }
+
+      .curriculum-card.is-current {
+        transform: scale(1);
+      }
+
+      .goal-list {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .photo-break {
+        height: 35vh;
+        min-height: 220px;
+      }
+
+      .photo-break-split {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .photo-break-split .photo-cell {
+        height: 35vh;
+        min-height: 200px;
+      }
+
+      .photo-break-split .photo-cell:first-child {
+        border-right: none;
+        border-bottom: 3px solid var(--bg);
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    ============================================================
+    SOUZOUDO セミナー / 勉強会 テンプレート
+    ============================================================
+    使い方: このファイルをコピーして {{...}} の部分を書き換えてください。
+    不要なセクションは丸ごと削除してOKです。
+
+    差し替え箇所一覧:
+    ─────────────────────────────────────────────
+    【基本情報】
+      {{PAGE_TITLE}}          ページタイトル (例: AI活用勉強会)
+      {{SITE_NAME}}           サイト名 (例: SOUZOUDO)
+      {{SITE_URL}}            トップページURL (例: /)
+      {{COPYRIGHT_YEAR}}      コピーライト年 (例: 2026)
+      {{COPYRIGHT_NAME}}      コピーライト名 (例: SOUZOUDO Inc.)
+
+    【Hero】
+      {{HERO_LABEL}}          英語ラベル (例: AI Study Session — Beginner)
+      {{HERO_TITLE}}          メインタイトル (例: AIと一緒に、<br>未来の働き方を描こう。)
+      {{HERO_SUBTITLE}}       サブタイトル
+      {{HERO_IMAGE}}          ヒーロー画像パス (例: images/hero.jpg)
+
+    【Message】
+      {{MESSAGE_LEAD}}        リード文 (HTMLタグ使用可)
+      {{MESSAGE_BODY}}        本文
+
+    【Photo Break (2枚分割)】
+      {{PHOTO1_IMAGE}}        左写真パス
+      {{PHOTO2_IMAGE}}        右写真パス
+
+    【Speaker】
+      {{SPEAKER_IMAGE}}       講師写真パス
+      {{SPEAKER_NAME_JA}}     講師名 (例: 鈴木 優作)
+      {{SPEAKER_NAME_EN}}     講師名英語 (例: Yusaku Suzuki)
+      {{SPEAKER_TITLES}}      肩書き (HTMLタグ使用可、<br>で改行)
+      {{SPEAKER_BIO}}         プロフィール文
+
+    【Curriculum】
+      {{CURRICULUM_TITLE}}    カリキュラム見出し
+      {{CURRICULUM_DESC}}     カリキュラム説明文
+      {{STEP1_TITLE}}         初級編タイトル (例: 初級編)
+      {{STEP1_SUBTITLE}}      初級編サブタイトル
+      {{STEP2_TITLE}}         中級編タイトル
+      {{STEP2_SUBTITLE}}      中級編サブタイトル
+      {{STEP3_TITLE}}         上級編タイトル
+      {{STEP3_SUBTITLE}}      上級編サブタイトル
+
+    【Photo Break (全幅)】
+      {{SCENE_IMAGE}}         セミナー風景写真パス
+
+    【Goal】
+      {{GOAL1_TEXT}}           ゴール1 タイトル
+      {{GOAL1_DESC}}           ゴール1 説明
+      {{GOAL2_TEXT}}           ゴール2 タイトル
+      {{GOAL2_DESC}}           ゴール2 説明
+
+    【CTA / アンケート】
+      {{FORM_URL}}             Googleフォーム等のURL
+    ─────────────────────────────────────────────
+  -->
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="{{SITE_URL}}" class="nav-logo">{{SITE_NAME}}</a>
+    <a href="{{SITE_URL}}" class="nav-back">&larr; HOME</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-photo">
+      <img src="{{HERO_IMAGE}}" alt="">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-label">{{HERO_LABEL}}</p>
+      <h1 class="hero-title">{{HERO_TITLE}}</h1>
+      <p class="hero-subtitle">{{HERO_SUBTITLE}}</p>
+    </div>
+    <div class="hero-scroll">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Message -->
+  <section class="message">
+    <div class="reveal">
+      <p class="section-label">About</p>
+      <p class="message-lead">{{MESSAGE_LEAD}}</p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p class="message-body">{{MESSAGE_BODY}}</p>
+    </div>
+  </section>
+
+  <!-- Photo Break (2枚分割) -->
+  <div class="photo-break-split reveal">
+    <div class="photo-cell">
+      <img src="{{PHOTO1_IMAGE}}" alt="">
+    </div>
+    <div class="photo-cell">
+      <img src="{{PHOTO2_IMAGE}}" alt="">
+    </div>
+  </div>
+
+  <!-- Speaker -->
+  <section class="speaker-section">
+    <div class="speaker-inner">
+      <div class="speaker-photo reveal">
+        <img src="{{SPEAKER_IMAGE}}" alt="{{SPEAKER_NAME_JA}}">
+      </div>
+      <div class="speaker-detail">
+        <p class="section-label reveal">Speaker</p>
+        <h2 class="speaker-name reveal reveal-delay-1">{{SPEAKER_NAME_JA}}</h2>
+        <p class="speaker-name-en reveal reveal-delay-1">{{SPEAKER_NAME_EN}}</p>
+        <p class="speaker-title reveal reveal-delay-2">{{SPEAKER_TITLES}}</p>
+        <p class="speaker-bio reveal reveal-delay-3">{{SPEAKER_BIO}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum -->
+  <section class="curriculum-section">
+    <div class="curriculum-header reveal">
+      <p class="section-label">Curriculum</p>
+      <h2 class="curriculum-title">{{CURRICULUM_TITLE}}</h2>
+      <p class="curriculum-desc">{{CURRICULUM_DESC}}</p>
+    </div>
+    <div class="curriculum-grid">
+      <div class="curriculum-card is-current reveal">
+        <div class="card-step">Step 01</div>
+        <div class="card-level">{{STEP1_TITLE}}</div>
+        <div class="card-subtitle">{{STEP1_SUBTITLE}}</div>
+        <span class="card-badge">今回はここ</span>
+      </div>
+      <div class="curriculum-card is-upcoming reveal reveal-delay-1">
+        <div class="card-step">Step 02</div>
+        <div class="card-level">{{STEP2_TITLE}}</div>
+        <div class="card-subtitle">{{STEP2_SUBTITLE}}</div>
+        <span class="card-badge">Coming Soon</span>
+      </div>
+      <div class="curriculum-card is-upcoming reveal reveal-delay-2">
+        <div class="card-step">Step 03</div>
+        <div class="card-level">{{STEP3_TITLE}}</div>
+        <div class="card-subtitle">{{STEP3_SUBTITLE}}</div>
+        <span class="card-badge">Coming Soon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Break (全幅) -->
+  <div class="photo-break reveal">
+    <img src="{{SCENE_IMAGE}}" alt="">
+  </div>
+
+  <!-- Goal -->
+  <section class="goal-section">
+    <div class="goal-inner">
+      <p class="section-label reveal">Goal</p>
+      <h2 class="goal-title reveal">この講座で得られること</h2>
+      <ul class="goal-list">
+        <li class="goal-item reveal">
+          <div class="goal-number">01</div>
+          <div class="goal-text">{{GOAL1_TEXT}}</div>
+          <div class="goal-desc">{{GOAL1_DESC}}</div>
+        </li>
+        <li class="goal-item reveal reveal-delay-2">
+          <div class="goal-number">02</div>
+          <div class="goal-text">{{GOAL2_TEXT}}</div>
+          <div class="goal-desc">{{GOAL2_DESC}}</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Preparation -->
+  <section class="prep-section">
+    <div class="prep-inner">
+      <p class="section-label reveal">Preparation</p>
+      <h2 class="prep-title reveal">事前準備のお願い</h2>
+      <p class="prep-lead reveal">当日スムーズに進行するために、以下の準備をお願いいたします。</p>
+      <ul class="prep-list">
+        <li class="prep-item reveal">
+          <div class="prep-icon">G</div>
+          <div class="prep-content">
+            <div class="prep-name">Google Gemini のダウンロード・登録</div>
+            <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
+            <div class="prep-links">
+              <a href="https://gemini.google.com/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+                PC (Web版)
+              </a>
+              <a href="https://apps.apple.com/us/app/google-gemini/id6477489729" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.bard" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-1">
+          <div class="prep-icon">N</div>
+          <div class="prep-content">
+            <div class="prep-name">NotebookLM のダウンロード・登録</div>
+            <div class="prep-note">Googleが提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
+            <div class="prep-links">
+              <a href="https://notebooklm.google.com/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+                PC (Web版)
+              </a>
+              <a href="https://apps.apple.com/us/app/google-notebooklm/id6737527615" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-2">
+          <div class="prep-icon">📋</div>
+          <div class="prep-content">
+            <div class="prep-name">事前アンケートへの回答</div>
+            <div class="prep-note">勉強会の内容をより充実させるため、簡単なアンケートにご協力ください。1分ほどで完了します。</div>
+            <div class="prep-links">
+              <a href="{{FORM_URL}}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+                Googleフォームを開く
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-3">
+          <div class="prep-icon">💻</div>
+          <div class="prep-content">
+            <div class="prep-name">パソコンまたはスマートフォンをお持ちください</div>
+            <div class="prep-note">当日は実際にAIを操作しながら進めていきます。パソコン・スマートフォンのいずれかをご持参ください。</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <p class="section-label" style="color: var(--accent);">Pre-Survey</p>
+      <h2 class="cta-title">事前に聞きたいことはありますか？</h2>
+      <p class="cta-desc">
+        勉強会をより充実した内容にするために、<br>
+        事前のご質問や気になっていることを<br>
+        お気軽にお送りください。
+      </p>
+      <a href="{{FORM_URL}}" target="_blank" rel="noopener" class="cta-button">Googleフォームで回答する</a>
+      <p class="cta-note">回答は1分ほどで完了します</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="{{SITE_URL}}" class="footer-logo">{{SITE_NAME}}</a>
+    <span class="footer-copy">&copy; {{COPYRIGHT_YEAR}} {{COPYRIGHT_NAME}}</span>
+  </footer>
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    function checkReveal() {
+      const windowHeight = window.innerHeight;
+      const triggerPoint = windowHeight * 0.85;
+
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < triggerPoint) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkReveal, { passive: true });
+    window.addEventListener('load', checkReveal);
+    checkReveal();
+  </script>
+</body>
+</html>
