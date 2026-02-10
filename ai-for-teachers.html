@@ -750,6 +750,168 @@
       margin-top: 0.5rem;
     }
 
+    /* ===== Preparation ===== */
+    .prep-section {
+      padding: 4rem 5vw 5rem;
+      background: var(--white);
+    }
+
+    .prep-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .prep-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .prep-lead {
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+    }
+
+    .prep-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .prep-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .prep-item:first-child {
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .prep-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      margin-top: 0.1rem;
+    }
+
+    .prep-content {
+      flex: 1;
+    }
+
+    .prep-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
+    }
+
+    .prep-note {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    .prep-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .prep-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 100px;
+      transition: all 0.25s ease;
+    }
+
+    .prep-links a:hover {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+    }
+
+    .prep-links a svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Schedule ===== */
+    .schedule-section {
+      padding: 4rem 5vw 5rem;
+      background: var(--bg);
+    }
+
+    .schedule-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .schedule-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .schedule-card {
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      background: var(--bg);
+    }
+
+    .schedule-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.25rem 0;
+    }
+
+    .schedule-row:not(:last-child) {
+      border-bottom: 1px solid rgba(196, 168, 122, 0.3);
+    }
+
+    .schedule-time {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      min-width: 80px;
+    }
+
+    .schedule-desc {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+      text-align: center;
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
       .nav {
@@ -764,8 +926,28 @@
       .tools-section,
       .prompt-section,
       .notebook-guide,
-      .cta-section {
+      .cta-section,
+      .schedule-section,
+      .prep-section {
         padding: 3.5rem 1.5rem;
+      }
+
+      .schedule-card {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .schedule-row {
+        gap: 1.25rem;
+      }
+
+      .schedule-time {
+        font-size: 0.85rem;
+        min-width: 65px;
+      }
+
+      .schedule-desc {
+        font-size: 0.85rem;
+        text-align: left;
       }
 
       .survey-stats {
@@ -828,6 +1010,101 @@
       今日のテーマは、あなた専用の「副担任」をつくること。<br>
       事前アンケートでいただいた声をもとに、内容を組み立てました。
     </p>
+  </section>
+
+  <!-- Schedule -->
+  <section class="schedule-section">
+    <div class="schedule-inner">
+      <h2 class="schedule-title reveal">今日の時間割</h2>
+      <div class="schedule-card reveal reveal-delay-1">
+        <div class="schedule-row">
+          <span class="schedule-time">15:30~</span>
+          <span class="schedule-desc">オープニング「AIって何者」</span>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-time">15:50~</span>
+          <span class="schedule-desc">Gemini × NotebookLM を一緒に触ってみよう</span>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-time">16:10~</span>
+          <span class="schedule-desc">授業の指導案をつくろう</span>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-time">16:30~</span>
+          <span class="schedule-desc">みんなで今日の学級通信をつくろう（応用編）</span>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-time">16:50</span>
+          <span class="schedule-desc">終了</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preparation -->
+  <section class="prep-section">
+    <div class="prep-inner">
+      <p class="section-label reveal">Preparation</p>
+      <h2 class="prep-title reveal">まだお済みでない方へ</h2>
+      <p class="prep-lead reveal">以下の準備がまだの方は、今のうちにお願いします。</p>
+      <ul class="prep-list">
+        <li class="prep-item reveal">
+          <div class="prep-icon">G</div>
+          <div class="prep-content">
+            <div class="prep-name">Google Gemini のダウンロード・登録</div>
+            <div class="prep-note">Googleアカウントがあればすぐにご利用いただけます。スマートフォンアプリまたはPC版をご準備ください。</div>
+            <div class="prep-links">
+              <a href="https://gemini.google.com/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+                PC (Web版)
+              </a>
+              <a href="https://apps.apple.com/us/app/google-gemini/id6477489729" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.bard" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-1">
+          <div class="prep-icon">N</div>
+          <div class="prep-content">
+            <div class="prep-name">NotebookLM のダウンロード・登録</div>
+            <div class="prep-note">Googleが提供するAIノートツールです。Googleアカウントでログインしてお使いいただけます。</div>
+            <div class="prep-links">
+              <a href="https://notebooklm.google.com/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+                PC (Web版)
+              </a>
+              <a href="https://apps.apple.com/us/app/google-notebooklm/id6737527615" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.labs.language.tailwind" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.332a1 1 0 0 1 0 1.72l-2.302 1.332-2.535-2.535 2.535-2.849zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Android
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="prep-item reveal reveal-delay-2">
+          <div class="prep-icon">📋</div>
+          <div class="prep-content">
+            <div class="prep-name">事前アンケートへの回答</div>
+            <div class="prep-note">勉強会の内容をより充実させるため、簡単なアンケートにご協力ください。1分ほどで完了します。</div>
+            <div class="prep-links">
+              <a href="https://forms.gle/qmWzBvAXDKW2hLFZ7" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5z"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+                Googleフォームを開く
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <!-- Survey Results -->
